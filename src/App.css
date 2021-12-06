@@ -1,12 +1,12 @@
 
 nav {
-    height: 48px;
+    max-height: 48px;
     overflow: hidden;
-    transition: ease-in 200ms;
+    transition: ease-out 300ms;
 }
 
 .expand {
-    height: auto;
+    max-height: 150px;
 }
 
 .dropdown{
@@ -15,16 +15,13 @@ nav {
     top: 23px;
     transform: translateY(-50%) scale(1.5);
     cursor: pointer;
+    transition: ease-in 200ms;
 }
 .rotate {
     transform: translateY(-50%) scale(1.5) rotate(180deg);
-    transition: ease-in 200ms;
 }
 
 @media screen and (min-width: 768px) {
-    nav {
-        height: auto !important;
-    }
    .dropdown {
        display: none;
    }     
