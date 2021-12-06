@@ -1,0 +1,30 @@
+nav {
+    height: 48px;
+    overflow: hidden;
+    transition: ease-in 200ms;
+}
+
+.expand {
+    height: auto;
+}
+
+.dropdown{
+    position: absolute;
+    right: 10px;
+    top: 23px;
+    transform: translateY(-50%) scale(1.5);
+    cursor: pointer;
+}
+.rotate {
+    transform: translateY(-50%) scale(1.5) rotate(180deg);
+    transition: ease-in 200ms;
+}
+
+@media screen and (min-width: 768px) {
+    nav {
+        height: auto !important;
+    }
+   .dropdown {
+       display: none;
+   }     
+}
