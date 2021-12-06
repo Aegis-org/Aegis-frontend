@@ -15,7 +15,7 @@ const NavBar = () => {
     return (
         <nav className={`relative font-roboto max-w-6xl w-100 font-bold py-3 px-10 mx-auto border-t border-b border-gray-300 ${isExpanded? 'expand' : ""}`}>
             <IoIosArrowDropdownCircle onClick={handleExpand} className={`dropdown ${isExpanded? "rotate" : ""}`}/>
-            <ul className="nav-items capitalize flex flex-wrap gap-x-10 gap-y-3 md:justify-between max-w-6xl mx-auto">
+            <ul className="nav-items capitalize flex flex-wrap gap-x-10 gap-y-3 md:justify-between max-w-6xl mx-auto" style={{color: "#291A2D"}}>
                 <li>
                     <Link to={'/overview'}>
                         overview
