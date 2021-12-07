@@ -3,6 +3,7 @@ import { GrFacebookOption, GrGithub, GrTwitter } from "react-icons/gr";
 import { AiOutlineInstagram } from "react-icons/ai";
 import FooterNavList from "./FooterNavList";
 import { BrowserRouter as Router, Link } from "react-router-dom";
+import Logo from "../assets/logo.png";
 
 const Footer = () => {
   return (
@@ -91,7 +92,11 @@ const Footer = () => {
       <div className="bg-hrcolor w-full h-1 mt-8"></div>
       {/* social */}
       <div className="  mt-5 md:flex md:justify-between md:px-14">
-        logo
+        <Router>
+          <Link to="/">
+            <img src={Logo} alt="Aegis-logo" className="w-12 h-10" />
+          </Link>
+        </Router>
         <div className="mt-5 md:mt-0 flex">
           <Router>
             <Link to="/">
