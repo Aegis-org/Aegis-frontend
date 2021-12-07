@@ -1,9 +1,10 @@
 import "./App.css";
+import Footer from "./footer/Footer";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">Aigis</header>
+      <Footer />
     </div>
   );
 }
