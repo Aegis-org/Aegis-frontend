@@ -7,6 +7,10 @@ module.exports = {
         hrcolor: "#C4C4C4",
       },
     },
+
+    fontFamily: {
+      'roboto': ['Roboto', 'sans-serif']
+    }, 
   },
   variants: {
     extend: {},
