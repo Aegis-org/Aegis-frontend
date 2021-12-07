@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Footer from "./footer/footer";
+import Home from "./pages/Home/Home";
 function App() {
   return (
     <Router>
@@ -9,7 +10,7 @@ function App() {
           Aigis
           <NavBar />
         </header>
-        <Footer />
+        {/* <Footer /> */}
       </div>
       <Routes>
         <Route path="/" element={<Home />} />
