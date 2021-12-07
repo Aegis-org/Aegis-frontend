@@ -1,15 +1,19 @@
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
+import Home from "./pages/Home/Home";
 function App() {
   return (
-    <Router>   
+    <Router>
       <div className="App">
         <header className="App-header">
           Aigis
           <NavBar />
         </header>
       </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
     </Router>
   );
 }
