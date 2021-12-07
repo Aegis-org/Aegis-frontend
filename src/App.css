@@ -5,11 +5,11 @@ nav {
     transition: ease-out 300ms;
 }
 
-.expand {
+nav.nav-expand {
     max-height: 150px;
 }
 
-.dropdown{
+.nav-dropdown{
     position: absolute;
     right: 10px;
     top: 23px;
@@ -17,12 +17,12 @@ nav {
     cursor: pointer;
     transition: ease-in 200ms;
 }
-.rotate {
+.dropdown-rotate {
     transform: translateY(-50%) scale(1.5) rotate(180deg);
 }
 
 @media screen and (min-width: 768px) {
-   .dropdown {
+   .nav-dropdown {
        display: none;
    }     
 }
