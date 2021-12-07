@@ -1,31 +1,33 @@
 import React from 'react';
 import { Button, Container} from 'react-bootstrap'
+import NavBar from '../NavBar';
 // import logo from './assets/logo.png';
 
 const Navbar = () => {
     // const logo = '/src/assets/logo.png';
 
     return (
-        <header>
-            <div className="logo">
-                {/* <img src={logo} alt="" srcset=""/> */}
-            </div>
-            <div className="links">
+        <>
+            <header>
+                <div className="logo">
+                    {/* <img src={logo} alt="" srcset=""/> */}
+                </div>
                 <div className="nav-links">
                     <a href="/">Home</a>
-                    <a href="http://">About</a>
-                    <a href="http://">Services</a>
-                    <a href="http://">Features</a>
-                    <a href="http://">Blog</a>
-                    <a href="http://">Contact</a>
-                    <a href="http://">Help</a>
+                    <a href="/">About</a>
+                    <a href="/">Services</a>
+                    <a href="/">Features</a>
+                    <a href="/">Blog</a>
+                    <a href="/">Contact</a>
+                    <a href="/">Help</a>
                 </div>
                 <div className="bttns">
                     <Button>Create an Account</Button>
                     <Button variant="default">Log in</Button>
                 </div>
-            </div>
-        </header>
+            </header>
+            <NavBar />
+        </>
     );
 }
  

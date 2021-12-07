@@ -1,3 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;700&family=Genos&family=Merriweather:wght@300;400;700&family=Open+Sans:wght@300;400;700&family=Roboto:wght@300;400;700&display=swap');
+
+
 * {
   margin: 0;
   padding: 0;
@@ -17,11 +24,6 @@ header {
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
-}
-
-.links {
-  display: flex;
-  justify-content: space-between;
 }
 
 .nav-links {
@@ -73,7 +75,11 @@ button:nth-child(2):hover {
 }
 
 @media screen and (max-width: 768px) {
-  .links {
+  button {
+    display: none;
+  }
+
+/* .links {
     display: flex;
     flex-direction: column;
     justify-content: end;
@@ -86,5 +92,5 @@ button:nth-child(2):hover {
   }
 
   .nav-links a {
-  }
+  } */
 }
