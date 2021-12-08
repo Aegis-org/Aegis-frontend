@@ -1,5 +1,9 @@
+.social-link {
+  @apply bg-black text-white p-1  rounded-2xl  transform duration-150 hover:scale-110;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;700&family=Genos&family=Merriweather:wght@300;400;700&family=Open+Sans:wght@300;400;700&family=Roboto:wght@300;400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;700&family=Genos&family=Merriweather:wght@300;400;700&family=Open+Sans:wght@300;400;700&family=Roboto:wght@300;400;700&display=swap");
