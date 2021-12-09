@@ -3,9 +3,17 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     fontFamily: {
-      'roboto': ['Roboto', 'sans-serif']
+      montserrart: ["Montserrat", "sans-serif"],
     },
-    extend: {},
+    letterSpacing: {
+      widest: ".875rem",
+    },
+
+    extend: {
+      colors: {
+        "pry-clr": "#291A2D",
+      },
+    },
   },
   variants: {
     extend: {},
