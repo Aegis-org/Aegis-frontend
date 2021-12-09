@@ -6,4 +6,110 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;700&family=Genos&family=Merriweather:wght@300;400;700&family=Open+Sans:wght@300;400;700&family=Roboto:wght@300;400;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;700&family=Genos&family=Merriweather:wght@300;400;700&family=Open+Sans:wght@300;400;700&family=Roboto:wght@300;400;700&display=swap');
+
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  display: flex;
+  justify-content: space-around;
+  padding: 15px 8px;
+  text-align: center;
+}
+
+header .logo {
+  background-image: url(./assets/logo.png);
+  width: 35px;
+  height: 35px;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+header .nav-links {
+  align-items: center;
+  text-align: center;
+}
+
+header .nav-links a {
+  text-decoration: none;
+  padding: 5px 10px;
+  color:  #AB97AF;
+  font-size: 15px;
+  margin: 3px .5rem;
+}
+
+header .nav-links a:hover {
+  color: #291A2D;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+header button:nth-child(1) {
+  background: #291A2D;
+  color: white;
+  border-radius: 50px;
+  border: 2px solid #291A2D;
+  padding: 5px 25px;
+  font-size: small;
+  cursor: pointer;
+  margin: 0 12px;
+}
+
+header button:nth-child(1):hover {
+  background: #291A2D;
+  border: 2px solid #291A2D;
+}
+
+header button:nth-child(2) {
+  color: #291A2D;
+  border-radius: 50px;
+  border: 2px solid #291A2D;
+  padding: 5px 25px;
+  font-size: small;
+  cursor: pointer;
+  margin: 0 12px;
+}
+
+header button:nth-child(2):hover {
+  color: white;
+  background: #291A2D;
+}
+
+header .icon {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  header button {
+    display: none;
+  }
+
+  header .nav-links {
+    display: none;
+  }
+
+  header .icon {
+    display: block;
+  }
+
+/* .links {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+  }
+
+  .nav-links a, .bttns {
+    padding: 15px 5px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav-links a {
+  } */
+}
+
