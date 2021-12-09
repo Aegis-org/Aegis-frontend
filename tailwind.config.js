@@ -5,7 +5,11 @@ module.exports = {
     fontFamily: {
       'roboto': ['Roboto', 'sans-serif']
     },
-    extend: {},
+    extend: {
+      backgroundColor: {
+        hrcolor: "#C4C4C4",
+      },
+    },
   },
   variants: {
     extend: {},
