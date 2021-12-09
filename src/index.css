@@ -17,7 +17,7 @@ header {
   text-align: center;
 }
 
-.logo {
+header .logo {
   background-image: url(./assets/logo.png);
   width: 35px;
   height: 35px;
@@ -26,12 +26,12 @@ header {
   background-repeat: no-repeat;
 }
 
-.nav-links {
+header .nav-links {
   align-items: center;
   text-align: center;
 }
 
-.nav-links a {
+header .nav-links a {
   text-decoration: none;
   padding: 5px 10px;
   color:  #AB97AF;
@@ -39,44 +39,58 @@ header {
   margin: 3px .5rem;
 }
 
-.nav-links a:hover {
+header .nav-links a:hover {
   color: #291A2D;
   text-decoration: underline;
   font-weight: bold;
 }
 
-button:nth-child(1) {
+header button:nth-child(1) {
   background: #291A2D;
   color: white;
   border-radius: 50px;
   border: 2px solid #291A2D;
   padding: 5px 25px;
   font-size: small;
+  cursor: pointer;
   margin: 0 12px;
 }
 
-button:nth-child(1):hover {
+header button:nth-child(1):hover {
   background: #291A2D;
   border: 2px solid #291A2D;
 }
 
-button:nth-child(2) {
+header button:nth-child(2) {
   color: #291A2D;
   border-radius: 50px;
   border: 2px solid #291A2D;
   padding: 5px 25px;
   font-size: small;
+  cursor: pointer;
   margin: 0 12px;
 }
 
-button:nth-child(2):hover {
+header button:nth-child(2):hover {
   color: white;
   background: #291A2D;
 }
 
+header .icon {
+  display: none;
+}
+
 @media screen and (max-width: 768px) {
-  button {
+  header button {
     display: none;
+  }
+
+  header .nav-links {
+    display: none;
+  }
+
+  header .icon {
+    display: block;
   }
 
 /* .links {

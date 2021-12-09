@@ -1,6 +1,7 @@
 import React from 'react';
-import { Button, Container} from 'react-bootstrap'
-import NavBar from '../NavBar';
+import { Link } from 'react-router-dom';
+import { GiHamburgerMenu } from "react-icons/gi";
+
 // import logo from './assets/logo.png';
 
 const Navbar = () => {
@@ -13,20 +14,22 @@ const Navbar = () => {
                     {/* <img src={logo} alt="" srcset=""/> */}
                 </div>
                 <div className="nav-links">
-                    <a href="/">Home</a>
-                    <a href="/">About</a>
-                    <a href="/">Services</a>
-                    <a href="/">Features</a>
-                    <a href="/">Blog</a>
-                    <a href="/">Contact</a>
-                    <a href="/">Help</a>
+                    <Link to="/home">Home</Link>
+                    <Link to="/about">About</Link>
+                    <Link to="/services">Services</Link>
+                    <Link to="/features">Features</Link>
+                    <Link to="/blog">Blog</Link>
+                    <Link to="/contact">Contact</Link>
+                    <Link to="/help">Help</Link>
                 </div>
                 <div className="bttns">
-                    <Button>Create an Account</Button>
-                    <Button variant="default">Log in</Button>
+                    <button>Create an Account</button>
+                    <button>Log in</button>
+                </div>
+                <div className="icon">
+                    <GiHamburgerMenu /> 
                 </div>
             </header>
-            <NavBar />
         </>
     );
 }
