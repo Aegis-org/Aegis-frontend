@@ -13,6 +13,10 @@ module.exports = {
       colors: {
         "pry-clr": "#291A2D",
       },
+
+      backgroundColor: {
+        hrcolor: "#C4C4C4",
+      },
     },
   },
   variants: {

@@ -21,7 +21,7 @@ const NavBar = () => {
 
   return (
     <nav
-      className={`relative font-montserrart max-w-6xl w-100 font-bold py-3 px-10 mx-auto border-t border-b border-gray-300 ${
+      className={`relative font-roboto max-w-6xl w-100 font-bold py-3 px-10 mx-auto border-t border-b border-gray-300 ${
         isExpanded ? "nav-expand" : ""
       }`}
     >

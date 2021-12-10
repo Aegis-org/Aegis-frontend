@@ -35,7 +35,7 @@ const Home = () => {
       />
       <SectionHeader heading="Features we offer" />
 
-      <div className="hidden sm:block home-verify-advert pb-8">
+      <div className="hidden sm:block home-verify-advert pb-8 mb-8">
         <VerifyAdvert title2={text[3].title} text={text[3].text} />
 
         <VerifyInput />
