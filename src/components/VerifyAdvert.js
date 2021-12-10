@@ -6,7 +6,7 @@ const VerifyAdvert = (props) => {
   return (
     <div
       className={`font-montserrart px-5 flex flex-col justify-center items-center ${
-        title2 && "my-8 home-verify-advert"
+        title2 ? "my-8 home-verify-advert" : "mt-24"
       }`}
     >
       <div className={`flex flex-row gap-5 mt-8`}>
