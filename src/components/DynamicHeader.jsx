@@ -5,8 +5,13 @@ import { FiMenu } from 'react-icons/fi'
 import { IoMdNotificationsOutline } from 'react-icons/io'
 import { IoSettingsOutline } from 'react-icons/io5'
 
+//hook
+import { useGetScreenBreakPoint } from '../hooks/useGetScreenBreakPoint'
+
 
 const DynamicHeader = () => {
+    const screen = useGetScreenBreakPoint();
+
     return (
         <div className="max-w-6xl mx-auto py-2 px-2 flex items-center">
             <FiMenu size="1.875rem" className=""/>
