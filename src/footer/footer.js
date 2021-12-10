@@ -7,7 +7,7 @@ import Logo from "../assets/logo.png";
 
 const Footer = () => {
   return (
-    <footer className="container mx-auto px-5 md:px-10">
+    <footer className="container mx-auto px-5 mb-8 md:px-10 font-montserrart">
       <div className=" md:grid md:grid-cols-4 md:px-8 lg:px-14 ">
         <FooterNavList linkHeading="our product">
           <li>
