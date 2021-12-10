@@ -4,16 +4,19 @@ import Header from "./components/Header/Header";
 import NavBar from "./components/NavBar";
 import Footer from "./footer/footer";
 import Home from "./pages/Home/Home";
+import DynamicHeader from "./components/DynamicHeader";
+
 function App() {
   return (
     <Router>
       <div className="App">
-        <Header>Aigis</Header>
-        <NavBar />
+        {/* <Header>Aigis</Header>
+        <NavBar /> */}
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/test" element={<DynamicHeader />} />
         </Routes>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </Router>
   );
