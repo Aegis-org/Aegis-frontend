@@ -28,7 +28,7 @@ export const useGetScreenBreakPoint = () => {
         window.addEventListener("resize", updateScreen)
         
         return () => {
-            window.removeEventListener("resize")
+            window.removeEventListener("resize", updateScreen)
         }
     }, [])
 
