@@ -3,7 +3,7 @@ import React from "react";
 const GalleryCard = ({ product }) => {
   const { image, model, price } = product;
   return (
-    <div className="flex flex-col justify-between items-center rounded-3xl py-2 px-4 max-w-xs shadow-xl mb-8 border border-pry-accent">
+    <div className="flex flex-col justify-between items-center rounded-3xl py-2 px-4 max-w-xs shadow-xl mb-8 border border-pry-accent hover:bg-gray-200">
       <figure
         className="bg-gray-200 rounded-3xl w-full
       "
