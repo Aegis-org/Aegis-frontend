@@ -12,6 +12,7 @@ module.exports = {
     extend: {
       colors: {
         "pry-clr": "#291A2D",
+        "pry-accent": "#DBC6E0",
       },
 
       backgroundColor: {

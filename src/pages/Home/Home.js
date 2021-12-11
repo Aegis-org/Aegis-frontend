@@ -1,13 +1,17 @@
 import React from "react";
+import GalleryCard from "../../components/GalleryCard";
 import HomeBody from "../../components/HomeBody";
 import SectionHeader from "../../components/SectionHeader";
 import VerifyAdvert from "../../components/VerifyAdvert";
 import VerifyInput from "../../components/VerifyInput";
+import Features from "./Features";
+import Carousel, { CarouselItem } from "../../components/Carousel";
+import { products } from "../../utils/DummyProductData";
 import { text } from "./HomeBodyText";
 
 const Home = () => {
   return (
-    <div className="max-w-6xl mx-auto mt-8">
+    <main className="max-w-6xl mx-auto mt-8">
       <HomeBody
         title={text[0].title}
         subtitle={text[0].subtitle}
@@ -33,14 +37,33 @@ const Home = () => {
         btn1={text[1].btn}
         image1={text[1].image}
       />
-      <SectionHeader heading="Features we offer" />
+      <SectionHeader heading="Features we offer" text={text} />
+
+      <Features />
+
+      <div className="sm:hidden">
+        <SectionHeader heading="Our MarketPlace" />
+      </div>
+      <div className="hidden sm:block">
+        <SectionHeader heading="Explore Our MarketPlace" text1={text} />
+      </div>
+      <section className=" font-montserrart px-4 sm:flex justify-between gap-x-6">
+        {products.map((product) => (
+          <GalleryCard key={product.id} product={product} />
+        ))}
+      </section>
+      {/* <Carousel>
+        <CarouselItem>item1</CarouselItem>
+        <CarouselItem>item1</CarouselItem>
+        <CarouselItem>item1</CarouselItem>
+      </Carousel> */}
 
       <div className="hidden sm:block home-verify-advert pb-8 mb-8">
         <VerifyAdvert title2={text[3].title} text={text[3].text} />
 
         <VerifyInput />
       </div>
-    </div>
+    </main>
   );
 };
 
