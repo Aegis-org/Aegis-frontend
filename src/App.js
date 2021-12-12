@@ -10,14 +10,14 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Header>Aigis</Header>
-        <NavBar />
+        {/* <Header>Aigis</Header>
+        <NavBar /> */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
-          {/* <Route path="/test" element={<DynamicHeader />} /> */}
+          <Route path="/test" element={<DynamicHeader />} />
         </Routes>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </Router>
   );

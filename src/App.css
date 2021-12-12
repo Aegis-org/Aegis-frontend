@@ -20,6 +20,30 @@ nav.nav-expand {
   transform: translateY(-50%) scale(1.5) rotate(180deg);
 }
 
+.dynamic-header-links {
+    max-height: 0px;
+    overflow: hidden;
+    opacity: 0;
+    transition: ease-out 300ms, opacity 300ms ease-out;
+}
+
+.dynamic-header-links.visible {
+    max-height: 560px;
+    opacity: 1;
+}
+/* .dynamic-header-links {
+    position: relative;
+    top: -590px;
+    z-index: -1;
+    opacity: 0;
+    transition: top ease-out 300ms, opacity  ease-out 200ms;
+}
+
+.dynamic-header-links.visible {
+    top: 0;
+    opacity: 1;
+} */
+
 .homebody-img-wrapper {
   position: relative;
   display: flex;
