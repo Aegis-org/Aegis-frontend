@@ -1,5 +1,5 @@
 .social-link {
-  @apply bg-black text-white p-1  rounded-2xl  transform duration-150 hover:scale-110;
+  @apply bg-black text-white p-1  rounded-2xl  transform duration-150 hover:scale-110 hover:bg-pry-accent;
 }
 
 @tailwind base;
