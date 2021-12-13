@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 
 export const useGetScreenBreakPoint = () => {
 
-    const initialState = getScreenSize(window.innerHeight)
+    const initialState = getScreenSize(window.innerWidth)
     const [screen, setScreen] = useState(initialState)
 
     function getScreenSize(current) {
