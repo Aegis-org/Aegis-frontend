@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import HomeBody from "../../components/HomeBody";
 import SectionHeader from "../../components/SectionHeader";
 import VerifyAdvert from "../../components/VerifyAdvert";
@@ -6,9 +6,16 @@ import VerifyInput from "../../components/VerifyInput";
 import Features from "./Features";
 import Carousel from "../../components/Carousel";
 import { products } from "../../utils/DummyProductData";
-import { text } from "./HomeBodyText";
+import { modal, text } from "./HomeBodyText";
+import VerifyModal from "../../components/VerifyModal";
 
 const Home = () => {
+  const [showModal, setShowModal] = useState(false);
+  const [show, setShow] = useState(false);
+  const [testVehicleData] = useState("123456789");
+
+  const handleClose = () => setShowModal(false);
+
   return (
     <main className="max-w-6xl mx-auto mt-8">
       <HomeBody
@@ -26,9 +33,46 @@ const Home = () => {
         image={text[2].image}
       />
 
-      <VerifyInput />
+      <VerifyInput
+        setShowModal={setShowModal}
+        setShow={setShow}
+        testVehicleData={testVehicleData}
+      />
+
+      {show ? (
+        <VerifyModal
+          showModal={showModal}
+          title={modal[0].title}
+          smiley={modal[0].smiley}
+          message={modal[0].message}
+          image={modal[0].image}
+          imgAlt={modal[0].imgAlt}
+          handleClose={handleClose}
+        />
+      ) : show == null ? (
+        <VerifyModal
+          showModal={showModal}
+          title={modal[2].title}
+          image={modal[2].image}
+          imgAlt={modal[2].imgAlt}
+          btn={modal[2].btn}
+          handleClose={handleClose}
+          // doSomething={doSomething}
+        />
+      ) : (
+        <VerifyModal
+          showModal={showModal}
+          title={modal[1].title}
+          smiley={modal[1].smiley}
+          message={modal[1].message}
+          image={modal[1].image}
+          imgAlt={modal[1].imgAlt}
+          handleClose={handleClose}
+        />
+      )}
 
       <SectionHeader heading="Why Choose Us" />
+
       <HomeBody
         title1={text[1].title}
         subtitle={text[1].subtitle}
@@ -36,6 +80,7 @@ const Home = () => {
         btn1={text[1].btn}
         image1={text[1].image}
       />
+
       <SectionHeader heading="Features we offer" text={text} />
 
       <Features />
@@ -48,14 +93,14 @@ const Home = () => {
       </div>
 
       <section className="w-min mx-auto">
-        <Carousel data={products}></Carousel>
+        <Carousel data={products} />
       </section>
 
-      <div className="hidden sm:block home-verify-advert pb-8 mb-8">
+      <section className="hidden sm:block home-verify-advert pb-8 mb-8">
         <VerifyAdvert title2={text[3].title} text={text[3].text} />
 
-        <VerifyInput />
-      </div>
+        <VerifyInput setShowModal={setShowModal} />
+      </section>
     </main>
   );
 };
