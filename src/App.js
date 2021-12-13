@@ -6,6 +6,8 @@ import Footer from "./footer/footer";
 import Home from "./pages/Home/Home";
 import DynamicHeader from "./components/DynamicHeader";
 
+
+
 function App() {
   return (
     <Router>

@@ -8,6 +8,11 @@ import { FiSearch } from 'react-icons/fi'
 import { BsSearch } from "react-icons/bs";
 import SearchBar from './SearchBar'
 
+// header for root route i.e '/home'
+import NavBar from './NavBar'
+import Header from './Header/Header'
+
+// menu list items
 import MenuLinks from './MenuLinks'
 
 //hook
@@ -43,17 +48,28 @@ const DynamicHeader = () => {
     
     console.log({screen, dashboardSearchVis, underSearch})
 
+    if (location == '/' || location == '/home') {
+        return (
+            <>
+                <Header/>
+                <NavBar/>
+            </>
+        )
+    }
+
     return (
         <div className="max-w-6xl mx-auto">
-            <div className="py-2 px-2 flex flex-wrap gap-y-3 sm:flex-nowrap items-center">
-                <FiMenu size="1.875rem" onClick={() => setMenuVisibility(prev => !prev)} className="cursor-pointer text-pry-clr" />
-                <img src={Logo} alt="Aegis-logo" className="w-10 mx-4" />
+            <div className="py-2 px-2 flex flex-wrap gap-y-3 gap-x-8 lg:gap-x-32 sm:flex-nowrap items-center justify-between">
+                <div className="flex gap-x-4 items-center flex-shrink-0">
+                    <FiMenu size="1.875rem" onClick={() => setMenuVisibility(prev => !prev)} className="cursor-pointer text-pry-clr" />
+                    <img src={Logo} alt="Aegis-logo" className="w-10" />
+                </div>
                 {dashboardSearchVis && <SearchBar query={searchTerm} setQuery={setSearchTerm} />}
                 {(screen == 'sm' && underSearch) ? <SearchBar query={searchTerm} setQuery={setSearchTerm} /> : null}
-                <div className="flex items-center ml-auto">
-                    <BsSearch size="1.75rem" onClick={() => setUnderSearch(prev => !prev)} className="sm:hidden cursor-pointer mr-4 text-pry-clr"/>
-                    <IoSettingsOutline size="1.875rem" className="cursor-pointer mr-4 text-pry-clr"/>
-                    <IoMdNotificationsOutline size="1.875rem" className="cursor-pointer mr-4 text-pry-clr"/>
+                <div className="flex items-center gap-x-4">
+                    <BsSearch size="1.75rem" onClick={() => setUnderSearch(prev => !prev)} className="sm:hidden cursor-pointer text-pry-clr"/>
+                    <IoSettingsOutline size="1.875rem" className="cursor-pointer text-pry-clr"/>
+                    <IoMdNotificationsOutline size="1.875rem" className="cursor-pointer text-pry-clr"/>
                     <div className="w-14 h-14 rounded-2xl border border-gray-600 rounded-full bg-bluee-200">
                     </div>
                 </div>
