@@ -13,6 +13,7 @@ module.exports = {
       colors: {
         "pry-clr": "#291A2D",
         "pry-accent": "#DBC6E0",
+        "gray-color": "#C4C4C4",
       },
 
       backgroundColor: {
