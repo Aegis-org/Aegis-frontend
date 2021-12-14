@@ -7,6 +7,11 @@ import vectorCaution from "../../assets/Vector-caution.png";
 import vectorPlus from "../../assets/Vector-plus.png";
 import vectorSearch from "../../assets/vector-search.png";
 import vectorVehicle from "../../assets/Vector-vehicle.png";
+import happySmiley from "../../assets/happy-smiley.png";
+import sadSmiley from "../../assets/sad-smiley.png";
+import successVehicle from "../../assets/success-vehicle.png";
+import failedImg from "../../assets/failed-img-modal.png";
+import credentialsCheck from "../../assets/credentials-check.png";
 
 export const text = [
   {
@@ -66,5 +71,27 @@ export const features = [
     title: "Security Tips To Guide You",
     text: "Visit our blog for dily secuirity tips to guide in your car’s secuirity journey",
     image: vectorBell,
+  },
+];
+
+export const modal = [
+  {
+    title: "Vin Number Verification",
+    smiley: happySmiley,
+    message: "Yayyy! Vehicle checks out!",
+    image: successVehicle,
+    imgAlt: "successfully verified vehicle",
+  },
+  {
+    title: "Vin Number Verification",
+    smiley: sadSmiley,
+    message: "Oops! Verification failed",
+    image: failedImg,
+    imgAlt: "Vehicle verification failed",
+  },
+  {
+    title: "Resubmit Credentials",
+    image: credentialsCheck,
+    btn: "Tap here to upload credentials",
   },
 ];
