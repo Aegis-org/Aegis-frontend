@@ -16,7 +16,12 @@ module.exports = {
       },
 
       backgroundColor: {
-        hrcolor: "#C4C4C4",
+        graydark: "#C4C4C4",
+        graylight: "#E5E5E5",
+      },
+      gridTemplateColumns: {
+        // Simple 16 column grid
+        "5x": "repeat(auto-fit, minmax(200px, 1fr))",
       },
     },
   },

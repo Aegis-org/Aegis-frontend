@@ -88,7 +88,7 @@ nav.nav-expand {
   align-items: center;
   width: auto;
   height: auto;
-  z-index: 100;
+  z-index: 10;
 }
 
 .home-verify-advert {
@@ -110,6 +110,12 @@ nav.nav-expand {
 
 aside .homebody-features {
   box-shadow: 0px 0px 10px #dbc6e0;
+}
+
+.verify-input-placeholder::placeholder {
+  font-size: 0.475rem;
+  font-weight: 600;
+  word-wrap: break-word;
 }
 
 @media screen and (min-width: 768px) {
