@@ -103,11 +103,11 @@ const Footer = () => {
                 onChange={(e) => {
                   setEmailInput(e.target.value);
                 }}
-                className="border bg-graylight px-4 md:py-1 rounded md:w-48 lg:w-[13.5rem] xl:w-60"
+                className="border bg-graylight px-4 md:py-1 rounded md:w-48 lg:w-[13.5rem]"
               />
               <button type="submit" className="inline-block">
                 <MdNavigateNext
-                  className="bg-pry-clr -ml-5 -mb-2.5 md:-mb-3 rounded"
+                  className="bg-pry-clr -ml-5 -mb-2.5 md:-mb-3 rounded hover:bg-pry-accent"
                   size="2.2em"
                   color="white"
                 />

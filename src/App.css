@@ -136,3 +136,8 @@ aside .homebody-features {
     height: 100%;
   }
 }
+/* signup error message */
+.errormessage {
+  grid-column-start: 2;
+  grid-column-end: 5;
+}
