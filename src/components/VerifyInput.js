@@ -31,7 +31,10 @@ const VerifyInput = (props) => {
 
   return (
     <div className="relative">
-      <div className="font-montserrart flex flex-row justify-center items-center place-content-center gap-x-4 mt-4 sm:max-w-5xl">
+      <form
+        onSubmit={handleVerify}
+        className="font-montserrart flex flex-row justify-center items-center place-content-center gap-x-4 mt-4 sm:max-w-5xl"
+      >
         <input
           type="text"
           value={inputValue}
@@ -43,13 +46,12 @@ const VerifyInput = (props) => {
         />
         <button
           type="submit"
-          onClick={handleVerify}
           className="font-semibold rounded-lg bg-pry-clr p-3"
           style={{ color: "#fff" }}
         >
           Verify car now!
         </button>
-      </div>
+      </form>
       {error && (
         <p className="font-montserrart text-sm text-red-600 font-medium absolute -top-1/2 left-1/4">
           Please enter a valid plate number!
