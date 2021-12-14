@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router'
+import { Link } from 'react-router-dom'
 import Logo from '../assets/logo.png'
 import { FiMenu } from 'react-icons/fi'
 import { IoMdNotificationsOutline } from 'react-icons/io'
@@ -62,7 +63,9 @@ const DynamicHeader = () => {
             <div className="py-2 px-2 flex flex-wrap gap-y-3 gap-x-8 lg:gap-x-32 sm:flex-nowrap items-center justify-between">
                 <div className="flex gap-x-4 items-center flex-shrink-0">
                     <FiMenu size="1.875rem" onClick={() => setMenuVisibility(prev => !prev)} className="cursor-pointer text-pry-clr" />
-                    <img src={Logo} alt="Aegis-logo" className="w-10" />
+                    <Link to='/'>
+                        <img src={Logo} alt="Aegis-logo" className="w-10" />
+                    </Link>
                 </div>
                 {dashboardSearchVis && <SearchBar query={searchTerm} setQuery={setSearchTerm} />}
                 {(screen == 'sm' && underSearch) ? <SearchBar query={searchTerm} setQuery={setSearchTerm} /> : null}
