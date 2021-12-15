@@ -5,6 +5,7 @@ import NavBar from "./components/NavBar";
 import Footer from "./components/footer/footer";
 import Home from "./pages/Home/Home";
 import Dashboard from "./pages/Dashboard/SellerDashboard";
+import SignUp from "./pages/Home/SignUp";
 import DynamicHeader from "./components/DynamicHeader";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/signup" element={<SignUp />} />
         </Routes>
         <Footer />
       </div>
