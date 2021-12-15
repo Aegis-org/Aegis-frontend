@@ -49,16 +49,6 @@ const Home = () => {
           imgAlt={modal[0].imgAlt}
           handleClose={handleClose}
         />
-      ) : show == null ? (
-        <VerifyModal
-          showModal={showModal}
-          title={modal[2].title}
-          image={modal[2].image}
-          imgAlt={modal[2].imgAlt}
-          btn={modal[2].btn}
-          handleClose={handleClose}
-          // doSomething={doSomething}
-        />
       ) : (
         <VerifyModal
           showModal={showModal}
@@ -99,7 +89,11 @@ const Home = () => {
       <section className="hidden sm:block home-verify-advert pb-8 mb-8">
         <VerifyAdvert title2={text[3].title} text={text[3].text} />
 
-        <VerifyInput setShowModal={setShowModal} />
+        <VerifyInput
+          setShowModal={setShowModal}
+          setShow={setShow}
+          testVehicleData={testVehicleData}
+        />
       </section>
     </main>
   );

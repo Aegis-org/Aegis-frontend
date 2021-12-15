@@ -17,8 +17,7 @@ const VerifyInput = (props) => {
     e.preventDefault();
     if (value === "") {
       setError(true);
-      setShow(null);
-      setShowModal(true);
+      setShowModal(false);
     } else if (value === testVehicleData) {
       setShow(true);
       setShowModal(true);

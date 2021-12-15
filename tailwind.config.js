@@ -41,12 +41,21 @@ module.exports = {
         "nude":"transparent",
         "pry-clr": "#291A2D",
         "pry-accent": "#DBC6E0",
+<<<<<<< HEAD
         "sec-clr": "#AB97AF",
         "fade-bg": "#E5E5E5",
+=======
+        "gray-color": "#C4C4C4",
+>>>>>>> 8d3a4ac99d0c8f7c8a1507adf85366361a15d1cc
       },
 
       backgroundColor: {
-        hrcolor: "#C4C4C4",
+        graydark: "#C4C4C4",
+        graylight: "#E5E5E5",
+      },
+      gridTemplateColumns: {
+        // Simple 16 column grid
+        "5x": "repeat(auto-fit, minmax(200px, 1fr))",
       },
     },
   },
