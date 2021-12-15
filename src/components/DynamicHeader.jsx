@@ -73,7 +73,7 @@ const DynamicHeader = () => {
                     <BsSearch size="1.75rem" onClick={() => setUnderSearch(prev => !prev)} className="sm:hidden cursor-pointer text-pry-clr"/>
                     <IoSettingsOutline size="1.875rem" className="cursor-pointer text-pry-clr"/>
                     <IoMdNotificationsOutline size="1.875rem" className="cursor-pointer text-pry-clr"/>
-                    <div className={`w-14 h-14 rounded-2xl border border-gray-600 rounded-full bg-bluee-200 ${dashboardSearchVis && 'hidden'}`}>
+                    <div className={`w-14 h-14 border border-gray-600 rounded-full bg-bluee-200 ${dashboardSearchVis && 'hidden'}`}>
                     </div>
                 </div>
             </div>

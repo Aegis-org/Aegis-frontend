@@ -4,7 +4,7 @@ import Header from "./components/Header/Header";
 import NavBar from "./components/NavBar";
 import Footer from "./components/footer/footer";
 import Home from "./pages/Home/Home";
-import Dashboard from "./pages/Dashboard/Dashboard";
+import Dashboard from "./pages/Dashboard/SellerDashboard";
 import DynamicHeader from "./components/DynamicHeader";
 
 function App() {

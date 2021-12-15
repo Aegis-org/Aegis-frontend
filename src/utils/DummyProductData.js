@@ -28,3 +28,20 @@ export const products = [
     image: mercedes,
   },
 ];
+
+export const users = [
+  {
+    id: 1,
+    firstname: 'Ezekiel',
+    lastname: 'Frederick',
+    email: 'ezekiel@gmail.com',
+    type: 'seller'
+  },
+  {
+    id: 2,
+    firstName: 'Cassidy',
+    lastName: 'Nwune',
+    email: 'kass.nwune@gmail.com',
+    type: 'buyer'
+  }
+]
