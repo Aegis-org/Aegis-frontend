@@ -5,6 +5,7 @@ import NavBar from "./components/NavBar";
 import Footer from "./footer/footer";
 import Home from "./pages/Home/Home";
 import DynamicHeader from "./components/DynamicHeader";
+import Login from "./components/Login";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/login" element={<Login />} />
           {/* <Route path="/test" element={<DynamicHeader />} /> */}
         </Routes>
         <Footer />
