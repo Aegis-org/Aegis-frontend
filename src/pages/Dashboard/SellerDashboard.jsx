@@ -48,6 +48,11 @@ const Dashboard = () => {
         setImage({})
     }
 
+    const submitHandler = (e) => {
+        e.preventDefault()
+        console.log('formSubmitted')
+    }
+
     const [image, setImage] = useState({})
     const [values, setValues] = useState(initialState)
 
@@ -115,11 +120,13 @@ const Dashboard = () => {
                     alt="uploaded vehicle or default vehicle" />
                 </div>
                 <div className="px-5 py-5 bg-pry-clr rounded-xl text-white">
-                    <form className="flex flex-col gap-y-4" action="">
+                    <form className="flex flex-col gap-y-4" onSubmit={(e) => submitHandler(e)}>
+                        
                         <label htmlFor="type">
                             Vehicle Type
                             <input className="bg-white bg-opacity-50 rounded-xl font-medium mt-1 px-4 py-2 w-full text-white focus:outline-none focus:bg-opacity-30" type="text" name="type" id="type" />
                         </label>
+
                         <label className="relative " htmlFor="price">
                             Asking Price
                             <input 
@@ -128,6 +135,7 @@ const Dashboard = () => {
                             />
                             <span className="absolute font-bold text-lg left-2 top-8 text-pry-clr">$</span>
                         </label>
+
                         <label htmlFor="engineNumber">
                             Engine Number
                             <input className="bg-white bg-opacity-50 rounded-xl font-medium mt-1 px-4 py-2 w-full text-white focus:outline-none focus:bg-opacity-30" 
@@ -136,6 +144,7 @@ const Dashboard = () => {
                             onChange={(e) => handleInput(e) }
                             />
                         </label>
+
                         <label htmlFor="fuel">
                             Fuel
                             <select value={values.fuel} name="fuel" id="fuel"
@@ -149,11 +158,15 @@ const Dashboard = () => {
                                     value={option}>
                                         {option}
                                     </option>
-                                ))}
-                                
-                            </select>
-                            
+                                ))}   
+                            </select> 
                         </label>
+
+                        <div className="mx-auto mt-4">
+                            <button type="submit">
+                                <ProfileButton text={'Upload'} textColor={'text-pry-clr'} bgColor={'bg-pry-accent'} />
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>

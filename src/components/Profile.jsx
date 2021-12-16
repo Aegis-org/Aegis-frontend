@@ -7,7 +7,7 @@ import { MdPhoneInTalk } from 'react-icons/md'
 import { MdOutlineLogout } from 'react-icons/md'
 import { MdDelete } from 'react-icons/md'
 
-// passing dummy user data
+// passing dummy user data. If there's a global user object from useContext, pass that instead
 // if the profile component is being used in a route other than dashboard, then don't pass the dashboard prop
 // the default prop means by default it is report a seller, only in the seller dahboard is it report a buyer
 
