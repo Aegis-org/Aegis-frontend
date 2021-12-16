@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import HomeBody from "../../components/HomeBody";
 import SectionHeader from "../../components/SectionHeader";
 import VerifyAdvert from "../../components/VerifyAdvert";
@@ -9,13 +9,11 @@ import { products } from "../../utils/DummyProductData";
 import { modal, text } from "./HomeBodyText";
 import VerifyModal from "../../components/VerifyModal";
 import Footer from "../../components/footer/footer";
+import GlobalContext from "../../utils/GlobalContextProvider";
 
 const Home = () => {
-  const [showModal, setShowModal] = useState(false);
+  const ctx = useContext(GlobalContext);
   const [show, setShow] = useState(false);
-  const [testVehicleData] = useState("123456789");
-
-  const handleClose = () => setShowModal(false);
 
   return (
     <>
@@ -36,30 +34,34 @@ const Home = () => {
         />
 
         <VerifyInput
-          setShowModal={setShowModal}
+          setShowModal={ctx.setShowModal}
           setShow={setShow}
-          testVehicleData={testVehicleData}
+          testVehicleData={ctx.testVehicleData}
+          placeholder="Enter Vin number (Test by typing: 123456789)"
+          btn="Verify car now!"
+          btnStyles="font-semibold rounded-lg p-3"
+          inputStyles="pl-4 py-4 bg-transparent"
         />
 
         {show ? (
           <VerifyModal
-            showModal={showModal}
+            showModal={ctx.showModal}
             title={modal[0].title}
             smiley={modal[0].smiley}
             message={modal[0].message}
             image={modal[0].image}
             imgAlt={modal[0].imgAlt}
-            handleClose={handleClose}
+            handleClose={ctx.handleModalClose}
           />
         ) : (
           <VerifyModal
-            showModal={showModal}
+            showModal={ctx.showModal}
             title={modal[1].title}
             smiley={modal[1].smiley}
             message={modal[1].message}
             image={modal[1].image}
             imgAlt={modal[1].imgAlt}
-            handleClose={handleClose}
+            handleClose={ctx.handleModalClose}
           />
         )}
 
@@ -92,9 +94,13 @@ const Home = () => {
           <VerifyAdvert title2={text[3].title} text={text[3].text} />
 
           <VerifyInput
-            setShowModal={setShowModal}
+            setShowModal={ctx.setShowModal}
             setShow={setShow}
-            testVehicleData={testVehicleData}
+            testVehicleData={ctx.testVehicleData}
+            placeholder="Enter Vin number (Test by typing: 123456789)"
+            btn="Verify car now!"
+            btnStyles="font-semibold rounded-lg p-3"
+            inputStyles="pl-4 py-4 bg-transparent"
           />
         </section>
       </main>
