@@ -27,6 +27,7 @@ const Profile = ({user, dashboard}) => {
             </ProfileButton>
             <ProfileButton text={'Delete Account'} icon={<MdDelete size="1.5rem" className="absolute left-8"/>} bgColor={'bg-red-500'} textColor='text-white'>
             </ProfileButton>
+            { user.type === 'buyer' && <ProfileButton text={'Become a Seller'}  bgColor={'bg-pry-clr'} textColor='text-white' />}
         </div>
     )
 }
