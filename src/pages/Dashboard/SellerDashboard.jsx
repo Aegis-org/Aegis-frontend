@@ -84,8 +84,8 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
-            <div className="dashboard-divider md:px-2">Another component here</div>
-            { !screen.match(/^(sm|md)$/) && <div className="dashboard-divider md:pl-8"><Profile className="" user={user} dashboard={'seller'}/></div> }
+            <div className="dashboard-divider md:px-8">Another component here</div>
+            { !screen.match(/^(sm|md|lg)$/) && <div className="dashboard-divider md:pl-8"><Profile className="" user={user} dashboard={'seller'}/></div> }
         </div>
     )
 }

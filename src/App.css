@@ -77,9 +77,9 @@ nav.nav-expand {
   display: none;
   content: '';
   height: 100%;
-  width: 3px;
+  width: 2px;
   border-radius: 2px;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.2);
   left: 0;
   top: 0;
   position: absolute;
