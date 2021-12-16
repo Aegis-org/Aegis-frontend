@@ -1,9 +1,9 @@
 import { useState, useRef } from "react";
-import Profile from "../../components/Profile";
-import { useGetScreenBreakPoint } from "../../hooks/useGetScreenBreakPoint";
-import { users } from "../../utils/DummyProductData";
-import ProfileButton from "../../components/ProfileButton";
-import defaultVehicleImage from "../../assets/product-mercedes.png"
+import Profile from "../../../components/Profile";
+import { useGetScreenBreakPoint } from "../../../hooks/useGetScreenBreakPoint";
+import { users } from "../../../utils/DummyProductData";
+import ProfileButton from "../../../components/ProfileButton";
+import defaultVehicleImage from "../../../assets/product-mercedes.png"
 import { validFileType, returnFileSize } from "./imageValidation";
 
 
@@ -56,7 +56,11 @@ const Dashboard = () => {
     const [image, setImage] = useState({})
     const [values, setValues] = useState(initialState)
 
-    const dummyInputs = [{text: 'Car Model', type:'text', name: 'model', halfSpan: true}, {text: 'Year', type:'number', name: 'year', halfSpan: true}, {text: 'Mileage', type:'number', name: 'mileage', placeholder:'Vehicle mileage in KM'}, {text: 'Location', type:'text', name: 'location', placeholder:'Current address'}]
+    const dummyInputs = [{text: 'Car Model', type:'text', name: 'model', halfSpan: true, placeholder:''}, 
+    {text: 'Year', type:'number', name: 'year', halfSpan: true, placeholder:''}, 
+    {text: 'Mileage', type:'number', name: 'mileage', placeholder:'Vehicle mileage in KM', halfSpan:false}, 
+    {text: 'Location', type:'text', name: 'location', placeholder:'Current address', halfSpan:false}
+    ]
     const fuelOptions = ['petroleum', 'diesel', 'hydrogen', 'electricity']
 
     return (
@@ -99,7 +103,7 @@ const Dashboard = () => {
                                 type={input.type} 
                                 name={input.name} 
                                 id={input.name}
-                                value={values.[input.name]}
+                                value={values[input.name]}
                                 placeholder={input.placeholder}
                                 onChange={(e) => handleInput(e)}
                                 />
