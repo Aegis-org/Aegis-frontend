@@ -33,12 +33,9 @@ nav.nav-expand {
 }
 
 .search-bar {
-  flex: 1 1 100%;
-  position: relative;
-  /* height: 40px; */
-  /* width: 50%; */
-  /* max-width: 500px; */
-  min-width: 100px;
+    flex: 1 1 100%;
+    position: relative;
+    min-width: 100px;
 }
 
 .search-icon {
@@ -60,6 +57,40 @@ nav.nav-expand {
   border-radius: 25px;
   font-size: 0.75rem;
 }
+
+/* .uploadCarImageButton::-webkit-file-upload-button {
+  background: none;
+  border: none;
+} */
+
+.uploadVehicleImage {
+  opacity: 0;
+  position: absolute;
+  height: 0px;
+  /* top: 0; */
+}
+
+.dashboard-divider {
+  position: relative;
+}
+
+.carUploadPreview {
+  max-height: 500px;
+  /* height: 30vh; */
+}
+
+.dashboard-divider::before {
+  display: none;
+  content: '';
+  height: 100%;
+  width: 2px;
+  border-radius: 2px;
+  background-color: rgba(0, 0, 0, 0.2);
+  left: 0;
+  top: 0;
+  position: absolute;
+}
+
 
 .homebody-img-wrapper {
   position: relative;
@@ -129,6 +160,9 @@ aside .homebody-features {
 @media screen and (min-width: 768px) {
   .nav-dropdown {
     display: none;
+  }
+  .dashboard-divider::before {
+    display: block;
   }
 }
 
