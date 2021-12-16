@@ -15,7 +15,7 @@ const Profile = ({user, dashboard}) => {
     return (
         <div className="flex flex-col space-y-8">
             <Link to='/profile'>
-                <ProfileButton text={'Edit profile'} icon={<HiOutlinePencil size="1.5rem" className="absolute left-8" />} />
+                <ProfileButton text={'Edit profile'} border={'border-2 border-gray-300'} icon={<HiOutlinePencil size="1.5rem" className="absolute left-8" />} />
             </Link>
             { user.type === 'seller' && <ProfileButton text={'My Vehicles'} icon={<IoCarSportSharp size="1.5rem" className="absolute left-8"/>} bgColor={'bg-pry-accent'}>
             </ProfileButton>}

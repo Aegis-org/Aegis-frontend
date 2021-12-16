@@ -5,7 +5,6 @@ import Logo from '../assets/logo.png'
 import { FiMenu } from 'react-icons/fi'
 import { IoMdNotificationsOutline } from 'react-icons/io'
 import { IoSettingsOutline } from 'react-icons/io5'
-import { FiSearch } from 'react-icons/fi'
 import { BsSearch } from "react-icons/bs";
 import SearchBar from './SearchBar'
 
@@ -32,7 +31,7 @@ const DynamicHeader = () => {
        
         function showBigNav(location, screen) {
             if (location.includes('dashboard')) {
-                if (screen != ('sm')) {
+                if (screen !== ('sm')) {
                     setDashboardSearchVis(true)
                 }
                 else {
@@ -45,11 +44,11 @@ const DynamicHeader = () => {
         }
 
         showBigNav(location, screen)
-    }, [screen])
+    }, [screen, location])
     
-    console.log({screen, dashboardSearchVis, underSearch})
+    // console.log({screen, dashboardSearchVis, underSearch})
 
-    if (location == '/' || location == '/home') {
+    if (location === '/' || location === '/home') {
         return (
             <>
                 <Header/>
@@ -68,7 +67,7 @@ const DynamicHeader = () => {
                     </Link>
                 </div>
                 {dashboardSearchVis && <SearchBar query={searchTerm} setQuery={setSearchTerm} />}
-                {(screen == 'sm' && underSearch) ? <SearchBar query={searchTerm} setQuery={setSearchTerm} /> : null}
+                {(screen === 'sm' && underSearch) ? <SearchBar query={searchTerm} setQuery={setSearchTerm} /> : null}
                 <div className="flex items-center gap-x-4">
                     <BsSearch size="1.75rem" onClick={() => setUnderSearch(prev => !prev)} className="sm:hidden cursor-pointer text-pry-clr"/>
                     <IoSettingsOutline size="1.875rem" className="cursor-pointer text-pry-clr"/>

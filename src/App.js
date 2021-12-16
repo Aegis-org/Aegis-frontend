@@ -1,7 +1,5 @@
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import Header from "./components/Header/Header";
-import NavBar from "./components/NavBar";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Footer from "./components/footer/footer";
 import Home from "./pages/Home/Home";
 import Dashboard from "./pages/Dashboard/SellerDashboard";

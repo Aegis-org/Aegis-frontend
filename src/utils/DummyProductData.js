@@ -32,8 +32,8 @@ export const products = [
 export const users = [
   {
     id: 1,
-    firstname: 'Ezekiel',
-    lastname: 'Frederick',
+    firstName: 'Ezekiel',
+    lastName: 'Frederick',
     email: 'ezekiel@gmail.com',
     type: 'seller'
   },
