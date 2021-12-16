@@ -20,7 +20,7 @@ const Features = () => {
             to help
           </p>
           <h3 className="font-bold text-xl">
-            Feel The Best Experience With Aegis
+            Feel The Best Experience With Aigis
           </h3>
           <span className="block mt-1 rounded-lg w-12 h-1 bg-gray-500"></span>
         </div>

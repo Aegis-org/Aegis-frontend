@@ -86,15 +86,18 @@ const SignUp = () => {
                     name="comfirmPassword"
                     type="password"
                   />
-                  <p className="text-center text-gray-color font-bold text-base md:text-xl">
+                  <p className="text-center text-gray-color font-semibold text-base md:text-xl">
                     Already have an account{" "}
                     <span className="text-pry-clr">
-                      <Link to="/signin">Sign in</Link>
+                      <Link to="/signin" className="hover:underline">
+                        Sign in
+                      </Link>
                     </span>
                   </p>
                   <button
                     type="submit"
-                    className="bg-pry-clr  py-3 p-6 w-full text-white rounded-xl mt-11 text-xl md:text-xl font-bold "
+                    className="bg-pry-clr  py-3 p-6 w-full text-white rounded-xl mt-11 text-lg md:text-base font-semibold hover:text-pry-clr hover:bg-pry-accent
+                    transition-all"
                   >
                     Create Account
                   </button>

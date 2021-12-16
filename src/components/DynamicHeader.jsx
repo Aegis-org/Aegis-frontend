@@ -6,23 +6,23 @@ import { FiMenu } from 'react-icons/fi'
 import { IoMdNotificationsOutline } from 'react-icons/io'
 import { IoSettingsOutline } from 'react-icons/io5'
 import { BsSearch } from "react-icons/bs";
-import SearchBar from './SearchBar'
+import SearchBar from "./SearchBar";
 
 // header for root route i.e '/home'
-import NavBar from './NavBar'
-import Header from './Header/Header'
+import NavBar from "./NavBar";
+import Header from "./Header/Header";
 
 // menu list items
-import MenuLinks from './MenuLinks'
+import MenuLinks from "./MenuLinks";
 
 //hook
-import { useGetScreenBreakPoint } from '../hooks/useGetScreenBreakPoint'
+import { useGetScreenBreakPoint } from "../hooks/useGetScreenBreakPoint";
 
 const DynamicHeader = () => {
-    const [searchTerm, setSearchTerm] = useState("")
-    const [underSearch, setUnderSearch] = useState(false)
-    const [menuVisibility, setMenuVisibility] = useState(false)
-    const [dashboardSearchVis, setDashboardSearchVis] = useState(false)
+  const [searchTerm, setSearchTerm] = useState("");
+  const [underSearch, setUnderSearch] = useState(false);
+  const [menuVisibility, setMenuVisibility] = useState(false);
+  const [dashboardSearchVis, setDashboardSearchVis] = useState(false);
 
     const location = useLocation().pathname
     const screen = useGetScreenBreakPoint();
@@ -87,4 +87,4 @@ const DynamicHeader = () => {
 //     )
 // }
 
-export default DynamicHeader
+export default DynamicHeader;
