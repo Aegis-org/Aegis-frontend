@@ -1,22 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BsXCircleFill } from "react-icons/bs";
+import GlobalContext from "../utils/GlobalContextProvider";
 
 const VerifyModal = (props) => {
-  const {
-    title,
-    smiley,
-    message,
-    btn,
-    image,
-    imgAlt,
-    showModal,
-    handleClose,
-    doSomething,
-  } = props;
+  const ctx = useContext(GlobalContext);
+
+  const { title, smiley, message, btn, image, imgAlt, doSomething } = props;
 
   return (
     <>
-      {showModal && (
+      {ctx.showModal && (
         <div
           className="fixed top-0 left-0 w-full h-full z-20"
           style={{ background: "rgba(0, 0, 0, 0.6)" }}
@@ -27,7 +20,7 @@ const VerifyModal = (props) => {
                 {title}
               </h4>
               <button
-                onClick={handleClose}
+                onClick={ctx.handleModalClose}
                 className="text-pry-clr text-3xl sm:text-4xl absolute top-4 right-4 z-10 hover:text-red-600"
               >
                 <BsXCircleFill />
