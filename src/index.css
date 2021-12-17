@@ -1,15 +1,8 @@
-<<<<<<< HEAD
-/* .social-link {
-  @apply bg-black text-white p-1  rounded-2xl  transform duration-150 hover:scale-110;
-} */
-=======
-
+/* 
 .social-link {
   @apply bg-black text-white p-1  rounded-2xl  transform duration-150 hover:scale-110 hover:bg-pry-accent;
 }
-
->>>>>>> 8d3a4ac99d0c8f7c8a1507adf85366361a15d1cc
-
+ */
 
 @tailwind base;
 @tailwind components;
