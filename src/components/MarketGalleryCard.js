@@ -1,15 +1,15 @@
 import React from "react";
 
-const MarketGalleryCard = (props) => {
-  const { name, image, imgAlt, type, price, year, bodyType, fuel } = props;
+const MarketGalleryCard = ({ products }) => {
+  const { name, image, imgAlt, type, price, year, bodyType, fuel } = products;
 
   return (
     <>
-      <div className="flex flex-col justify-center bg-pry-clr text-white p-4 rounded-2xl max-w-xs sm:max-w-sm">
+      <div className="flex flex-col justify-center bg-pry-clr text-white p-4 rounded-2xl max-w-xs sm:max-w-md">
         <div className="text-center font-medium mb-4">
           <h4>{name}</h4>
         </div>
-        <figure>
+        <figure className="flex justify-center items-center">
           <img src={image} alt={imgAlt} />
         </figure>
         <div className="py-4 car-details">

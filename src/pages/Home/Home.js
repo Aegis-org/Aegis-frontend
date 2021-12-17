@@ -10,6 +10,7 @@ import { modal, text } from "./HomeBodyText";
 import VerifyModal from "../../components/VerifyModal";
 import Footer from "../../components/footer/footer";
 import GlobalContext from "../../utils/GlobalContextProvider";
+import GalleryCard from "../../components/GalleryCard";
 
 const Home = () => {
   const ctx = useContext(GlobalContext);
@@ -87,7 +88,7 @@ const Home = () => {
         </div>
 
         <section className="w-min mx-auto">
-          <Carousel data={products} />
+          <Carousel data={products} component={<GalleryCard />}></Carousel>
         </section>
 
         <section className="hidden sm:block home-verify-advert pb-8 mb-8">
