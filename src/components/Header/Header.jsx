@@ -17,10 +17,12 @@ const Navbar = () => {
           <Link to="/help">Help</Link>
         </div>
         <div className="bttns">
-          <button className="font-montserrart font-medium">
+          <Link to="/home" className="font-montserrart font-medium">
             Create an Account
-          </button>
-          <button className="font-montserrart font-medium">Log in</button>
+          </Link>
+          <Link to="/login" className="font-montserrart font-medium">
+            Log in
+          </Link>
         </div>
         <div className="icon">
           <GiHamburgerMenu />

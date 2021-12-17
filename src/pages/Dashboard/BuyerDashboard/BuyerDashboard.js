@@ -68,7 +68,7 @@ const BuyerDashboard = () => {
           </div>
         </div>
         <aside className="RHS-content hidden sm:block w-80 h-5/6 mt-14 ml-auto">
-          <Profile user="buyer" />
+          <Profile user={{ user: "buyer" }} />
         </aside>
       </section>
     </>
