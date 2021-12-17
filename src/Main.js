@@ -24,10 +24,7 @@ const Main = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/gallery" element={<MarketGallery />} />
 
-        <Route
-          path="/buyer:id"
-          element={`${ctx.isLoggedIn && <BuyerDashboard />}`}
-        />
+        <Route path="/buyer:id" element={<BuyerDashboard />} />
         <Route path="/seller/:id" element={<SellerDashboard />} />
       </Routes>
     </GlobalContextProvider>
