@@ -1,8 +1,7 @@
 /* 
 .social-link {
   @apply bg-black text-white p-1  rounded-2xl  transform duration-150 hover:scale-110 hover:bg-pry-accent;
-}
- */
+} */
 
 @tailwind base;
 @tailwind components;
@@ -20,7 +19,7 @@
   box-sizing: border-box;
 }
 
-/* header {
+header {
   display: flex;
   justify-content: space-around;
   padding: 15px 8px;
@@ -103,7 +102,7 @@ header .icon {
     display: block;
   }
 
-  .links {
+  /* .links {
     display: flex;
     flex-direction: column;
     justify-content: end;
@@ -116,9 +115,5 @@ header .icon {
   }
 
   .nav-links a {
-  }
-} */
-
-header a:hover {
-  font-weight: 700 !important;
+  } */
 }
