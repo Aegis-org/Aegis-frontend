@@ -1,9 +1,29 @@
 import React from "react";
 import Car from "../../assets/vector-car.png";
-import { Formik, Form } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import { TextFields } from "../../components/TextFields";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
+
+const onFormSubmit = async (values) => {
+  console.log(values);
+  const data = Object.entries(values);
+  // remove comfirm password data
+  data.pop();
+
+  const inputValue = Object.fromEntries(data);
+
+  fetch("https://aigis-backend-api.herokuapp.com/api/users/signup", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(inputValue),
+  })
+    .then((res) => res.text())
+    .then((result) => console.log(result))
+    .catch((error) => console.log("error", error));
+};
 
 const SignUp = () => {
   const validation = Yup.object({
@@ -22,17 +42,14 @@ const SignUp = () => {
       .oneOf([Yup.ref("password"), null], "password must match")
       .required("Comfirm password is required"),
   });
-  const onFormSubmit = (values) => {
-    console.log(values);
-  };
   return (
     <div className="bg-pry-accent  font-montserrart py-20">
-      <div className="w-full  md:max-w-screen-md mx-auto">
+      <div className="w-full  md:max-w-screen-sm mx-auto">
         <div className="flex  justify-center mb-6 px-5 text-pry-clr">
           <h1 className="text-2xl md:text-3xl text-white font-montserrart font-bold  ">
             Kickstart your car Protection journey
           </h1>
-          <img src={Car} alt="car" className="w-12 ml-0 md:w-9 md:ml-4" />
+          <img src={Car} alt="car" className="w-12 ml-0 md:w-13 md:ml-4" />
         </div>
         <div className=" bg-white p-5 md:px-8 md:py-14 border-2 border-black border-opacity-50 rounded-xl shadow-lg">
           <div className="mb-11">
@@ -48,6 +65,7 @@ const SignUp = () => {
             initialValues={{
               firstName: "",
               lastName: "",
+              username: "",
               phoneNumber: "",
               email: "",
               password: "",
@@ -56,51 +74,45 @@ const SignUp = () => {
             onSubmit={onFormSubmit}
             validationSchema={validation}
           >
-            {(formik) => (
-              <div>
+            {(formik) => {
+              return (
                 <Form>
+                  <TextFields name="firstName" label="FirstName:" type="text" />
+                  <TextFields name="lastName" label="LastName:" type="text" />
+                  <TextFields name="username" label="Username:" type="text" />
+                  <TextFields name="email" label="Email:" type="email" />
                   <TextFields
-                    label="First Name:"
-                    name="firstName"
-                    type="text"
-                  />
-                  <TextFields label="Last Name:" name="lastName" type="text" />
-
-                  <TextFields
-                    label="Phone Number:"
                     name="phoneNumber"
-                    type="number"
+                    label="Phone Number:"
+                    type="tel"
                   />
                   <TextFields
-                    label="Email Address:"
-                    name="email"
-                    type="email"
-                  />
-                  <TextFields
-                    label="Password:"
                     name="password"
+                    label="Password:"
                     type="password"
                   />
                   <TextFields
-                    label="Confirm Password:"
                     name="comfirmPassword"
+                    label="Comfirm Password:"
                     type="password"
                   />
+
                   <p className="text-center text-gray-color font-bold text-base md:text-xl">
                     Already have an account{" "}
                     <span className="text-pry-clr">
                       <Link to="/signin">Sign in</Link>
                     </span>
                   </p>
+
                   <button
                     type="submit"
-                    className="bg-pry-clr  py-3 p-6 w-full text-white rounded-xl mt-11 text-xl md:text-xl font-bold "
+                    className="bg-pry-clr  py-3 p-6 w-full text-white rounded-xl mt-11 text-xl md:text-xl font-bold opacity-100 disabled:opacity-50 transition-all duration-300"
                   >
                     Create Account
                   </button>
                 </Form>
-              </div>
-            )}
+              );
+            }}
           </Formik>
         </div>
       </div>
