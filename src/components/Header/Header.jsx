@@ -7,7 +7,7 @@ const Navbar = () => {
     <>
       <header className="font-montserrart px-16 py-6">
         <div className="logo"></div>
-        <div className="font-medium nav-links">
+        <div className="font-medium nav-links transition-all">
           <Link to="/home">Home</Link>
           <Link to="/about">About</Link>
           <Link to="/services">Services</Link>
@@ -16,11 +16,17 @@ const Navbar = () => {
           <Link to="/contact">Contact</Link>
           <Link to="/help">Help</Link>
         </div>
-        <div className="bttns">
-          <Link to="/home" className="font-montserrart font-medium">
+        <div className="bttns flex items-center gap-x-8">
+          <Link
+            to="/signup"
+            className="font-medium bg-pry-clr text-white text-sm rounded-full px-4 py-2 hover:text-pry-clr hover:bg-pry-accent transition-colors"
+          >
             Create an Account
           </Link>
-          <Link to="/login" className="font-montserrart font-medium">
+          <Link
+            to="/login"
+            className="font-bold border-2 border-pry-clr rounded-full px-4 py-1 hover:bg-pry-clr hover:text-white transition-colors"
+          >
             Log in
           </Link>
         </div>
