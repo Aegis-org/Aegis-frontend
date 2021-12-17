@@ -6,9 +6,7 @@ const HomeBody = (props) => {
 
   return (
     <>
-
       <div className="flex flex-col justify-between mt-20 px-5 sm:flex-row sm:items-center">
-
         <div className="flex">
           <div className="flex flex-col gap-y-7 font-montserrart sm:order-1">
             <h2
