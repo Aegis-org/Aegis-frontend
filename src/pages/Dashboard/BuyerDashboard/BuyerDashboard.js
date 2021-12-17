@@ -4,6 +4,7 @@ import GlobalContext from "../../../utils/GlobalContextProvider";
 import { BsXLg } from "react-icons/bs";
 import { products } from "../../../utils/DummyProductData";
 import MarketGalleryCard from "../../../components/MarketGalleryCard";
+import Profile from "../../../components/Profile";
 
 const BuyerDashboard = () => {
   const ctx = useContext(GlobalContext);
@@ -20,8 +21,8 @@ const BuyerDashboard = () => {
 
   return (
     <>
-      <section className="wrapper max-w-6xl mx-auto mt-8 px-3 sm:px-0 border border-red-600">
-        <div className="LHS-content">
+      <section className="wrapper sm:grid sm:grid-flow-col-dense sm:items-center sm:gap-x-0 max-w-6xl mx-auto mt-8 px-3 sm:px-0">
+        <div className="LHS-content w-full">
           <div className="Input-field">
             <h4 className="text-pry-clr font-semibold sm:font-bold">
               Vin Number
@@ -30,7 +31,7 @@ const BuyerDashboard = () => {
               onSubmit={handleVerify}
               className="inline-flex w-full gap-x-4 mt-3"
             >
-              <div className="inline-flex w-4/12 relative">
+              <div className="inline-flex sm:w-3/5 relative">
                 <label
                   htmlFor="text"
                   onClick={() => setValue("")}
@@ -51,7 +52,7 @@ const BuyerDashboard = () => {
               </button>
             </form>
           </div>
-          <div className="Gallery border border-green-500 grid justify-center items-center my-6 sm:mt-16 gap-y-6 sm:grid-cols-2">
+          <div className="Gallery grid justify-center items-center my-6 sm:mt-16 gap-y-6 gap-x-8 sm:gap-y-10 sm:grid-cols-2 w-full">
             {products.slice(0, 4).map((product) => {
               return (
                 <div className="" key={product.id}>
@@ -61,12 +62,14 @@ const BuyerDashboard = () => {
             })}
           </div>
           <div className="mb-8 sm:my-20 text-center">
-            <button className="text-pry-clr font-semibold sm:font-bold bg-pry-accent px-4 py-2 rounded-xl">
+            <button className="text-pry-clr font-semibold sm:font-bold bg-pry-accent px-4 py-2 rounded-xl hover:bg-pry-clr hover:text-white transition-colors">
               View more in Gallery
             </button>
           </div>
         </div>
-        <aside className="RHS-content hidden sm:block"></aside>
+        <aside className="RHS-content hidden sm:block w-80 h-5/6 mt-14 ml-auto">
+          <Profile user="buyer" />
+        </aside>
       </section>
     </>
   );
