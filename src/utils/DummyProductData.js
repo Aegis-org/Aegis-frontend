@@ -70,3 +70,20 @@ export const products = [
     VinNumber: "123456789",
   },
 ];
+
+export const users = [
+  {
+    id: 1,
+    firstName: 'Ezekiel',
+    lastName: 'Frederick',
+    email: 'ezekiel@gmail.com',
+    type: 'seller'
+  },
+  {
+    id: 2,
+    firstName: 'Cassidy',
+    lastName: 'Nwune',
+    email: 'kass.nwune@gmail.com',
+    type: 'buyer'
+  }
+]
