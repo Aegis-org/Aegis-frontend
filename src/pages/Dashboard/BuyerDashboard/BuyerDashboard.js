@@ -5,9 +5,11 @@ import { BsXLg } from "react-icons/bs";
 import { products } from "../../../utils/DummyProductData";
 import MarketGalleryCard from "../../../components/MarketGalleryCard";
 import Profile from "../../../components/Profile";
+import { Navigate } from "react-router-dom";
 
 const BuyerDashboard = () => {
   const ctx = useContext(GlobalContext);
+
   const [value, setValue] = useState("");
 
   const handleInput = (e) => {
@@ -19,9 +21,19 @@ const BuyerDashboard = () => {
     setValue(() => "");
   };
 
+  if (!ctx.isLoggedIn) {
+    return <Navigate to="/login" />;
+  }
+
   return (
     <>
-      <section className="wrapper sm:grid sm:grid-flow-col-dense sm:items-center sm:gap-x-0 max-w-6xl mx-auto mt-8 px-3 sm:px-0">
+      <div className="text-pry-clr text-lg font-semibold px-4 py-4 max-w-6xl mx-auto">
+        Welcome,
+        <span className="text-white bg-pry-clr px-6 py-1 ml-4">
+          {ctx.userInfo.firstName}
+        </span>
+      </div>
+      <section className="wrapper md:grid sm:grid-flow-col-dense md:items-center md:gap-x-0 max-w-6xl mx-auto mt-8 px-3 md:px-4">
         <div className="LHS-content w-full">
           <div className="Input-field">
             <h4 className="text-pry-clr font-semibold sm:font-bold">
@@ -67,7 +79,7 @@ const BuyerDashboard = () => {
             </button>
           </div>
         </div>
-        <aside className="RHS-content hidden sm:block w-80 h-5/6 mt-14 ml-auto">
+        <aside className="RHS-content hidden xl:block w-80 md:w-56 h-5/6 mt-14 ml-auto">
           <Profile user={{ user: "buyer" }} />
         </aside>
       </section>

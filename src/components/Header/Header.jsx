@@ -5,7 +5,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 const Navbar = () => {
   return (
     <>
-      <header className="font-montserrart px-16 py-6">
+      <header className="flex justify-between items-center font-montserrart px-16 py-6 max-w-6xl mx-auto">
         <div className="logo"></div>
         <div className="font-medium nav-links transition-all">
           <Link to="/home">Home</Link>

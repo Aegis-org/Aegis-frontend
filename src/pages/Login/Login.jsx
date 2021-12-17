@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-// import { FaGreaterThan } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import car from "../../assets/signup-vector-car.png";
 import GlobalContext from "../../utils/GlobalContextProvider";

@@ -1,81 +1,78 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const GlobalContext = createContext({
-  showModal: false,
-  userDetails: {
-    firstName: "",
-    lastName: "",
-    username: "",
-    email: "",
-    phoneNumber: "",
-    password: "",
-    nin: "",
-    verified: false,
-    vehicles: [],
-    _id: "",
-    __v: 0,
-  },
-  testVehicleData: "123456789",
-  isLoggedIn: false,
-  onLogout: () => {},
-  onLogin: (email, password) => {},
+  // showModal: false,
+  userDetails: {},
+  // testVehicleData: "123456789",
+  // isLoggedIn: false,
+  // onLogout: () => {},
+  // onLogin: (email, password) => {},
 });
 
 export const GlobalContextProvider = (props) => {
+  let navigate = useNavigate();
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [testVehicleData] = useState("123456789");
-  const [userDetails, setUserDetails] = useState({
-    firstName: "",
-    lastName: "",
-    username: "",
-    email: "",
-    phoneNumber: "",
-    password: "",
-    nin: "",
-    verified: false,
-    vehicles: [],
-    _id: "",
-    __v: 0,
-  });
+  const [userInfo, setUserInfo] = useState({});
+
+  useEffect(() => {
+    const storedUserLoggedInInfo = localStorage.getItem("isLoggedIn");
+
+    if (storedUserLoggedInInfo === "1") {
+      setIsLoggedIn(true);
+    }
+
+    return () => {
+      setIsLoggedIn(false);
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log(isLoggedIn);
+    console.log(userInfo._id);
+  }, [userInfo]);
 
   const handleModalClose = () => setShowModal(false);
 
-  const handleLogin = (email, password) => {
-    fetch("https://aigis-backend-api.herokuapp.com/api/users/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
-      redirect: "follow",
-    })
-      .then((res) => {
-        if (res.status === 200) {
-          console.log("logged in!");
-          setIsLoggedIn(() => true);
-          console.log(isLoggedIn);
-          return res.json();
-        } else {
-          console.log(res.statusText);
-        }
-      })
-      .then((result) => {
-        console.log(result);
-        handleUserdetails(result);
-      })
-      .catch((error) => console.log("error", error));
+  const handleLogin = async (email, password) => {
+    let response = await fetch(
+      "https://aigis-backend-api.herokuapp.com/api/users/login",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+        redirect: "follow",
+      }
+    );
+    if (response.status === 200) {
+      setIsLoggedIn(true);
+      response = await response.json();
+      let result = await response.userDetails;
+      localStorage.setItem("isLoggedIn", "1");
+      setUserInfo(result);
+      navigate(`/buyer/:id`);
+
+      console.log(isLoggedIn);
+      console.log(result._id);
+
+      return console.log(userInfo._id);
+    }
   };
 
   const handleLogout = () => {
     setIsLoggedIn(false);
   };
 
-  const handleUserdetails = (details) => {
-    setUserDetails(() => details);
+  const handleUserdetails = (info) => {
+    setUserInfo(info);
   };
 
   return (
@@ -83,7 +80,7 @@ export const GlobalContextProvider = (props) => {
       value={{
         isLoggedIn: isLoggedIn,
         showModal: showModal,
-        userDetails: userDetails,
+        userInfo: userInfo,
         testVehicleData: testVehicleData,
         setShowModal: setShowModal,
         handleModalClose: handleModalClose,
