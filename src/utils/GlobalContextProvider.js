@@ -25,9 +25,9 @@ export const GlobalContextProvider = (props) => {
       setIsLoggedIn(true);
     }
 
-    return () => {
-      setIsLoggedIn(false);
-    };
+    // return () => {
+    //   setIsLoggedIn(false);
+    // };
   }, []);
 
   const handleModalClose = () => setShowModal(false);

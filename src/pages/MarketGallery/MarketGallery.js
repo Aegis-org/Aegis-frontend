@@ -1,21 +1,41 @@
-import React from "react";
+import React, { useContext } from "react";
 import MarketGalleryCard from "../../components/MarketGalleryCard";
 import { products } from "../../utils/DummyProductData";
+import { FiSearch } from "react-icons/fi";
+import GlobalContext from "../../utils/GlobalContextProvider";
+import { Navigate } from "react-router-dom";
 
 const MarketGallery = () => {
+  const ctx = useContext(GlobalContext);
+
+  if (!ctx.isLoggedIn) {
+    return <Navigate to="/login" />;
+  }
+
   return (
-    <div className="font-montserrart">
-      <MarketGalleryCard
-        name={products[4].name}
-        image={products[4].image}
-        imgAlt={products[4].imgAlt}
-        type={products[4].type}
-        price={products[4].price}
-        year={products[4].year}
-        bodyType={products[4].bodyType}
-        fuel={products[4].fuel}
-      />
-    </div>
+    <section className="font-montserrart max-w-6xl mx-auto px-4 md:px-0">
+      <form>
+        <label htmlFor="search">Search</label>
+        <input type="text" name="search" value={""} onChange={""} />
+        <button>
+          <FiSearch />
+        </button>
+      </form>
+      <main>
+        <section>
+          {products.map((product) => {
+            return (
+              <div key={product.id}>
+                <MarketGalleryCard products={product} />
+              </div>
+            );
+          })}
+        </section>
+        <div>
+          <button>View more</button>
+        </div>
+      </main>
+    </section>
   );
 };
 
