@@ -53,29 +53,31 @@ const Dashboard = () => {
         setImage({})
     }
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
+
         e.preventDefault()
+        
         let formdata = new FormData()
         formdata.append('vehicleImage', image.imageFile)
-        // formdata.append('vehicleName', values.model)
-        // formdata.append('vehicleNumber', values.vehicleNumber)
-        // formdata.append('vehicleColor', values.color)
-        // formdata.append('vehicleMakeYear', values.year)
-        // formdata.append('price', values.price)
-        // formdata.append('fuel', values.fuel)
-        // formdata.append('mileage', values.mileage)
-        // formdata.append('location', values.location)
-        // formdata.append('vehicleType', values.vehicleType)
+        formdata.append('vehicleName', values.model)
+        formdata.append('vehicleNumber', values.vehicleNumber)
+        formdata.append('vehicleColor', values.color)
+        formdata.append('vehicleMakeYear', values.year)
+        formdata.append('price', values.price)
+        formdata.append('fuel', values.fuel)
+        formdata.append('mileage', values.mileage)
+        formdata.append('location', values.location)
+        formdata.append('vehicleType', values.vehicleType)
 
-        console.log(formdata)
+        console.log(Array.from(formdata))
 
-        axios({
-            url: "https://aigis-backend-api.herokuapp.com/api/users/vehicles/create",
-            method: "POST",
-            data: formdata
-        }).then((res) => {
-            
-        })
+        // axios({
+        //     url: "https://aigis-backend-api.herokuapp.com/api/users/vehicles/create",
+        //     method: "POST",
+        //     data: formdata
+        // }).then((res) => {
+
+        // })
         
         // const response = await fetch(
         //     "https://aigis-backend-api.herokuapp.com/api/users/vehicles/create",
@@ -179,7 +181,7 @@ const Dashboard = () => {
                 </div>
                 <div className="px-5 py-5 bg-pry-clr rounded-xl text-white">
 
-                    <form ref={formRef} name="vehicleCreate" id="vehicleCreate" className="flex flex-col gap-y-4" onSubmit={(e) => submitHandler(e)}>
+                    <form ref={formRef} name="vehicleCreate" id="vehicleCreate" className="flex flex-col gap-y-4" onSubmit={(e) => submitHandler(e)} >
 
                         <InputField text={'Vehicle Type'} type={'text'} name={'type'} values={values} placeholder={'car, bus ?'} handleInput={handleInput} />
                         <InputField text={'Asking Price'} type={'number'} name={'price'} values={values} placeholder={'price in dollars'} handleInput={handleInput} icon={'$'} />
@@ -202,9 +204,9 @@ const Dashboard = () => {
                             </select> 
                         </label>
 
-                        <div className="mx-auto mt-4">
+                        <div className="mx-auto mt-4 cursor-pointer">
                             <button type="submit">
-                                <ProfileButton text={'Upload'} textColor={'text-pry-clr'} bgColor={'bg-pry-accent'} />
+                                <ProfileButton text={'Upload'} textColor={'text-pry-clr'} bgColor={'bg-pry-accent'} onClick={() => submitHandler}/>
                             </button>
                         </div>
                     </form>
