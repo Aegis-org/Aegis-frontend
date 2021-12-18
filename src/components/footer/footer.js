@@ -13,7 +13,7 @@ const Footer = () => {
     e.preventDefault();
   };
   return (
-    <footer className="container mx-auto px-5 mb-8 md:px-10 font-montserrart">
+    <footer className="container mx-auto px-5 mb-8 md:px-10 font-montserrart pb-12 pt-16">
       <div className=" grid grid-cols-5x md:px-8 lg:px-14 ">
         <FooterNavList linkHeading="our product">
           <li>
