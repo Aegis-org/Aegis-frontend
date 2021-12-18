@@ -91,6 +91,12 @@ nav.nav-expand {
   position: absolute;
 }
 
+.seller-modal-form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
 .homebody-img-wrapper {
   position: relative;
