@@ -1,11 +1,12 @@
-import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import car from "../../assets/signup-vector-car.png";
 import GlobalContext from "../../utils/GlobalContextProvider";
 import Loginvalidate from "./Loginvalidate";
 
 const Login = () => {
   const user = useContext(GlobalContext);
+  const navigate = useNavigate()
 
   const [value, setValue] = useState({
     email: "",
@@ -27,6 +28,12 @@ const Login = () => {
 
     user.onLogin(value.email, value.password);
   };
+
+  useEffect(() => {
+    if (user.isLoggedIn && user.userInfo._id) {
+      navigate(`/${user.userInfo.isSeller ? 'seller' : 'buyer' }/${user.userInfo._id}`);
+    }
+  }, [user])
 
   return (
     <div className="bg-fade-bg p-8 max-w-6xl mx-auto bg-pry-accent grid justify-center">

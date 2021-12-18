@@ -6,15 +6,22 @@ import { IoWarningOutline } from "react-icons/io5";
 import { MdPhoneInTalk } from "react-icons/md";
 import { MdOutlineLogout } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import GlobalContext from "../utils/GlobalContextProvider";
 
 // passing dummy user data. If there's a global user object from useContext, pass that instead
 // if the profile component is being used in a route other than dashboard, then don't pass the dashboard prop
 // the default prop means by default it is report a seller, only in the seller dahboard is it report a buyer
 
-const Profile = ({ user, dashboard }) => {
-  const ctx = useContext(GlobalContext);
+const Profile = ({setSellerModal}) => {
+  const user = useContext(GlobalContext);
+  let userType = 'buyer';
+  
+  useEffect(() => {
+      if (user.userInfo.isSeller) {
+          userType = 'seller'
+      }
+  }, [user])
 
   return (
     <div className="flex flex-col space-y-8">
@@ -25,7 +32,7 @@ const Profile = ({ user, dashboard }) => {
           icon={<HiOutlinePencil size="1.5rem" className="absolute left-8" />}
         />
       </Link>
-      {user.type === "seller" && (
+      {userType === "seller" && (
         <ProfileButton
           text={"My Vehicles"}
           icon={<IoCarSportSharp size="1.5rem" className="absolute left-8" />}
@@ -33,7 +40,7 @@ const Profile = ({ user, dashboard }) => {
         ></ProfileButton>
       )}
       <ProfileButton
-        text={`Report a ${dashboard === "seller" ? "Buyer" : "Seller"}`}
+        text={`Report a ${userType === "seller" ? 'buyer' : 'seller'}`}
         icon={
           <IoWarningOutline
             size="1.5rem"
@@ -51,7 +58,7 @@ const Profile = ({ user, dashboard }) => {
         text={"Logout"}
         icon={<MdOutlineLogout size="1.5rem" className="absolute left-8" />}
         bgColor={"bg-pry-accent"}
-        onClick={ctx.onLogout}
+        onClick={user.onLogout}
       ></ProfileButton>
       <ProfileButton
         text={"Delete Account"}
@@ -59,19 +66,16 @@ const Profile = ({ user, dashboard }) => {
         bgColor={"bg-red-500"}
         textColor="text-white"
       ></ProfileButton>
-      {user.type === "buyer" && (
+      {userType === "buyer" && (
         <ProfileButton
           text={"Become a Seller"}
           bgColor={"bg-pry-clr"}
           textColor="text-white"
+          onClick={() => setSellerModal(true)}
         />
       )}
     </div>
   );
-};
-
-Profile.defaultProps = {
-  dashboard: "buyer",
 };
 
 export default Profile;
