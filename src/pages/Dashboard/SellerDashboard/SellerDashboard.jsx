@@ -112,6 +112,7 @@ const Dashboard = () => {
                                 type={input.type} 
                                 name={input.name} 
                                 id={input.name}
+                                required
                                 value={values[input.name]}
                                 placeholder={input.placeholder}
                                 onChange={(e) => handleInput(e)}
@@ -179,6 +180,7 @@ const InputField = ({ text, type, name, values, placeholder, handleInput, icon})
                 value={values[name]}
                 placeholder={placeholder}
                 onChange={(e) => handleInput(e) }
+                required
                 />
                 {icon && <span className="absolute font-bold text-md left-2 bottom-2 text-purple-900 rounded-full">$</span>}
             </label>
