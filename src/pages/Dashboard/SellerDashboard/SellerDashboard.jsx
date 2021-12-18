@@ -15,6 +15,8 @@ const Dashboard = () => {
     const imageRef = useRef(null)
     const formRef = useRef(null)
 
+    const postURL = "https://aigis-backend-api.herokuapp.com/api/users/vehicles/create"
+
     const initialState = {
         image: {},
         type: '',
@@ -78,6 +80,23 @@ const Dashboard = () => {
         // }).then((res) => {
 
         // })
+
+        // axios.post("https://aigis-backend-api.herokuapp.com/api/users/vehicles/create", formdata)
+        // .then(res => {
+        //     console.log(res)
+        // })
+
+        try {
+            // make axios post request
+            const response = await axios({
+              method: "post",
+              url: postURL,
+              data: formdata,
+              headers: { "Content-Type": "multipart/form-data" },
+            });
+          } catch(error) {
+            console.log(error)
+          }
         
         // const response = await fetch(
         //     "https://aigis-backend-api.herokuapp.com/api/users/vehicles/create",
