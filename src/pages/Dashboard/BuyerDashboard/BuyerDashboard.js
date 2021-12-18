@@ -80,11 +80,21 @@ const BuyerDashboard = () => {
           </div>
         </div>
         <aside className="RHS-content hidden xl:block w-80 md:w-56 h-5/6 mt-14 ml-auto">
-          <Profile user={{ user: "buyer" }} />
+          <Profile />
         </aside>
       </section>
     </>
   );
 };
+
+
+// export const sellerModal = () => {
+//   const [sellerDetails, setSellerDetails] = useState({})
+//   return (
+//     <div>
+
+//     </div>
+//   )
+// }
 
 export default BuyerDashboard;
