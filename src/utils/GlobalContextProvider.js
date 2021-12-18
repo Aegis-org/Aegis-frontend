@@ -30,11 +30,6 @@ export const GlobalContextProvider = (props) => {
     };
   }, []);
 
-  useEffect(() => {
-    console.log(isLoggedIn);
-    console.log(userInfo._id);
-  }, [userInfo]);
-
   const handleModalClose = () => setShowModal(false);
 
   const handleLogin = async (email, password) => {
