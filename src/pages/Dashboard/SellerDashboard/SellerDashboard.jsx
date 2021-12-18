@@ -6,6 +6,8 @@ import ProfileButton from "../../../components/ProfileButton";
 import defaultVehicleImage from "../../../assets/product-mercedes.png"
 import { validFileType, returnFileSize } from "./imageValidation";
 
+import axios from "axios";
+
 
 const Dashboard = () => {
     const user = users[0]
@@ -52,6 +54,10 @@ const Dashboard = () => {
 
     const submitHandler = (e) => {
         e.preventDefault()
+        const formdata = new FormData()
+        formdata.append('vehicleNumber')
+
+
         console.log('formSubmitted')
     }
 

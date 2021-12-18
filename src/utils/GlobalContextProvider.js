@@ -26,6 +26,7 @@ export const GlobalContextProvider = (props) => {
     }
 
     return () => {
+      localStorage.setItem("isLoggedIn", "0")
       setIsLoggedIn(false);
     };
   }, []);
@@ -53,16 +54,11 @@ export const GlobalContextProvider = (props) => {
       let result = await response.userDetails;
       localStorage.setItem("isLoggedIn", "1");
       setUserInfo(result);
-      navigate(`/buyer/:id`);
-
-      console.log(isLoggedIn);
-      console.log(result._id);
-
-      return console.log(userInfo._id);
     }
   };
 
   const handleLogout = () => {
+    localStorage.setItem("isLoggedIn", "0");
     setIsLoggedIn(false);
   };
 
