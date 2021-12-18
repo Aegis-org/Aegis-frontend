@@ -13,6 +13,7 @@ const Dashboard = () => {
     const user = users[0]
     const screen = useGetScreenBreakPoint()
     const imageRef = useRef(null)
+    const formRef = useRef(null)
 
     const initialState = {
         image: {},
@@ -20,10 +21,10 @@ const Dashboard = () => {
         model: '',
         year: '',
         mileage: '',
+        color: '',
         location: '',
         price: '',
-        engineNumber: '',
-        vin: '',
+        vehicleNumber: '',
         fuel: ''
     }
 
@@ -54,19 +55,62 @@ const Dashboard = () => {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        const formdata = new FormData()
-        formdata.append('vehicleNumber')
+        let formdata = new FormData()
+        formdata.append('vehicleImage', image.imageFile)
+        // formdata.append('vehicleName', values.model)
+        // formdata.append('vehicleNumber', values.vehicleNumber)
+        // formdata.append('vehicleColor', values.color)
+        // formdata.append('vehicleMakeYear', values.year)
+        // formdata.append('price', values.price)
+        // formdata.append('fuel', values.fuel)
+        // formdata.append('mileage', values.mileage)
+        // formdata.append('location', values.location)
+        // formdata.append('vehicleType', values.vehicleType)
 
+        console.log(formdata)
 
-        console.log('formSubmitted')
+        axios({
+            url: "https://aigis-backend-api.herokuapp.com/api/users/vehicles/create",
+            method: "POST",
+            data: formdata
+        }).then((res) => {
+            
+        })
+        
+        // const response = await fetch(
+        //     "https://aigis-backend-api.herokuapp.com/api/users/vehicles/create",
+        //     {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "multipart/form-data"
+        //         },
+        //         body: formdata,
+        //     }
+        // )
+
+        // if (response.status === 200 ) {
+        //     console.log("successful")
+
+        //     const res = await response.json()
+        //     console.log(res)
+        // }
+
+        // else {
+        //     console.log(response)
+        //     const error = await response.json()
+        //     console.log(error)
+        // }
+
+        // console.log('formSubmitted')
     }
 
     const [image, setImage] = useState({})
     const [values, setValues] = useState(initialState)
 
-    const carDetailsForm = [{text: 'Car Model', type:'text', name: 'model', halfSpan: true, placeholder:''}, 
+    const carDetailsForm = [{text: 'Vehicle Model', type:'text', name: 'model', halfSpan: true, placeholder:''}, 
     {text: 'Year', type:'number', name: 'year', halfSpan: true, placeholder:''}, 
-    {text: 'Mileage', type:'number', name: 'mileage', placeholder:'Vehicle mileage in KM', halfSpan:false}, 
+    {text: 'Color', type:'text', name: 'color', halfSpan: true, placeholder:''}, 
+    {text: 'Mileage', type:'number', name: 'mileage', halfSpan: true, placeholder:'Vehicle mileage in KM'}, 
     {text: 'Location', type:'text', name: 'location', placeholder:'Current address', halfSpan:false}
     ]
     const fuelOptions = ['petroleum', 'diesel', 'hydrogen', 'electricity']
@@ -134,11 +178,12 @@ const Dashboard = () => {
                     alt="uploaded vehicle or default vehicle" />
                 </div>
                 <div className="px-5 py-5 bg-pry-clr rounded-xl text-white">
-                    <form className="flex flex-col gap-y-4" onSubmit={(e) => submitHandler(e)}>
+
+                    <form ref={formRef} name="vehicleCreate" id="vehicleCreate" className="flex flex-col gap-y-4" onSubmit={(e) => submitHandler(e)}>
 
                         <InputField text={'Vehicle Type'} type={'text'} name={'type'} values={values} placeholder={'car, bus ?'} handleInput={handleInput} />
                         <InputField text={'Asking Price'} type={'number'} name={'price'} values={values} placeholder={'price in dollars'} handleInput={handleInput} icon={'$'} />
-                        <InputField text={'Engine Number'} type={'text'} name={'engineNumber'} values={values}  handleInput={handleInput} />
+                        <InputField text={'vehicle Number'} type={'text'} name={'vehicleNumber'} values={values}  handleInput={handleInput} />
 
                         <label htmlFor="fuel">
                             Fuel

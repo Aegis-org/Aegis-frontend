@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import GlobalContext from "../../../utils/GlobalContextProvider";
 
 import { BsXLg } from "react-icons/bs";
@@ -88,6 +89,10 @@ const BuyerDashboard = () => {
           <Profile setSellerModal={setSellerModal}/>
         </aside>
       </section>
+
+      <Link to={`/seller/${ctx.userInfo._id}`}>
+        Test Seller Button
+      </Link>
       
     </>
   );
