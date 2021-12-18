@@ -6,6 +6,8 @@ import ProfileButton from "../../../components/ProfileButton";
 import defaultVehicleImage from "../../../assets/product-mercedes.png"
 import { validFileType, returnFileSize } from "./imageValidation";
 
+import axios from "axios";
+
 
 const Dashboard = () => {
     const user = users[0]
@@ -33,11 +35,13 @@ const Dashboard = () => {
 
     const updateImage = () => {
         const imageFile = imageRef.current.files[0]
+        
         if (!imageFile) return
         if (validFileType(imageFile)) {
-            const size = returnFileSize(imageFile)
+            const size = returnFileSize(imageFile.size)
             const url = URL.createObjectURL(imageFile)
-            setImage({ imageFile, error:"", url:url, size:size })
+            console.log(imageFile, size)
+            setImage({ imageFile, error:"", url:url, size: size })
         } else {
             setImage({error: 'Invalid file type'})
         }
@@ -50,13 +54,17 @@ const Dashboard = () => {
 
     const submitHandler = (e) => {
         e.preventDefault()
+        const formdata = new FormData()
+        formdata.append('vehicleNumber')
+
+
         console.log('formSubmitted')
     }
 
     const [image, setImage] = useState({})
     const [values, setValues] = useState(initialState)
 
-    const dummyInputs = [{text: 'Car Model', type:'text', name: 'model', halfSpan: true, placeholder:''}, 
+    const carDetailsForm = [{text: 'Car Model', type:'text', name: 'model', halfSpan: true, placeholder:''}, 
     {text: 'Year', type:'number', name: 'year', halfSpan: true, placeholder:''}, 
     {text: 'Mileage', type:'number', name: 'mileage', placeholder:'Vehicle mileage in KM', halfSpan:false}, 
     {text: 'Location', type:'text', name: 'location', placeholder:'Current address', halfSpan:false}
@@ -73,7 +81,7 @@ const Dashboard = () => {
                 <div>
                     <p className='font-semibold mb-1 pl-2'>Upload Vehicle Image</p>
                     <div className="relative flex items-center bg-pry-accent px-2 py-2 rounded-xl font-medium whitespace-nowrap">
-                        <label className="cursor-pointer" htmlFor="vehicleImage">Select Image</label>
+                        <label className="cursor-pointer " htmlFor="vehicleImage">Select Image</label>
                         <input type="file" 
                         accept="image/*"
                         name="vehicleImage"
@@ -83,10 +91,11 @@ const Dashboard = () => {
                         onChange={updateImage}
                         required
                         />
-                        <p className="w-full px-2 py-2 rounded-lg ml-3 h-full bg-white">
+                        <p className="w-full px-2 py-2 rounded-lg ml-3 h-full bg-white overflow-hidden">
                             {image.imageFile ? image.imageFile.name  : 'No file selected'}
                             
                         </p>
+                        {image.size && <span className='absolute -bottom-7 right-0 text-gray-100 px-1 rounded-md bg-gray-600'>size: {image.size}</span>}
                         {image.error && <p className="absolute text-red-500 text-sm bottom-0">{image.error}</p>}
                     </div>
                 </div>
@@ -95,7 +104,7 @@ const Dashboard = () => {
                     <div className="grid gap-2 grid-cols-2 max-w-full">
                         {/* <InputField text={'Car Model'} type={'text'} name={'model'} />
                         <InputField text={'Year'} type={'text'} name={'year'} /> */}
-                        {dummyInputs.map(input => (
+                        {carDetailsForm.map(input => (
                             <div className={`col-span-2 md:${input.halfSpan && 'col-span-1'}`}>
                                 <label className="font-semibold mb-1 pl-2" htmlFor={input.name}>{input.text}</label>
                                 <input 
@@ -119,35 +128,16 @@ const Dashboard = () => {
                 <h1 className="font-medium text-center ">UPLOAD VEHICLES FOR DISPLAY</h1>
                 <div className=" aspect-video overflow-hidden">
                     <img 
-                    className="block w-full h-40 object-contain rounded-xl"
+                    className="block w-full h-40 object-cover rounded-xl"
                     src={image.url? image.url : defaultVehicleImage} 
                     alt="uploaded vehicle or default vehicle" />
                 </div>
                 <div className="px-5 py-5 bg-pry-clr rounded-xl text-white">
                     <form className="flex flex-col gap-y-4" onSubmit={(e) => submitHandler(e)}>
-                        
-                        <label htmlFor="type">
-                            Vehicle Type
-                            <input className="bg-white bg-opacity-50 rounded-xl font-medium mt-1 px-4 py-2 w-full text-white focus:outline-none focus:bg-opacity-30" type="text" name="type" id="type" />
-                        </label>
 
-                        <label className="relative " htmlFor="price">
-                            Asking Price
-                            <input 
-                            className="bg-white bg-opacity-50 rounded-xl font-medium mt-1 pl-5 px-4 py-2 w-full text-white focus:outline-none focus:bg-opacity-30" 
-                            type="number" name="price" id="price" 
-                            />
-                            <span className="absolute font-bold text-lg left-2 top-8 text-pry-clr">$</span>
-                        </label>
-
-                        <label htmlFor="engineNumber">
-                            Engine Number
-                            <input className="bg-white bg-opacity-50 rounded-xl font-medium mt-1 px-4 py-2 w-full text-white focus:outline-none focus:bg-opacity-30" 
-                            type="text" name="engineNumber" id="engineNumber"
-                            value={values.engineNumber}
-                            onChange={(e) => handleInput(e) }
-                            />
-                        </label>
+                        <InputField text={'Vehicle Type'} type={'text'} name={'type'} values={values} placeholder={'car, bus ?'} handleInput={handleInput} />
+                        <InputField text={'Asking Price'} type={'number'} name={'price'} values={values} placeholder={'price in dollars'} handleInput={handleInput} icon={'$'} />
+                        <InputField text={'Engine Number'} type={'text'} name={'engineNumber'} values={values}  handleInput={handleInput} />
 
                         <label htmlFor="fuel">
                             Fuel
@@ -179,20 +169,26 @@ const Dashboard = () => {
     )
 }
 
-// const InputField = ({ text, type, name, values}) => {
-//     return (
-//         <div className="flex flex-col w-full">
-//             <label className="font-semibold mb-1 pl-2" htmlFor={name}>{text}</label>
-//             <input 
-//             className="bg-pry-accent rounded-xl font-medium text-base p-2 w-full text-gray-800" 
-//             type={type} 
-//             name={name} 
-//             id={name}
-//             value={values.[name]}
-            
-//              />
-//         </div>
-//     )
-// }
+const InputField = ({ text, type, name, values, placeholder, handleInput, icon}) => {
+    return (
+        <div className="flex flex-col w-full">
+            <label htmlFor={name} className="relative">
+                {text}
+                <input className="bg-white bg-opacity-50 rounded-xl font-medium mt-1 px-4 pl-5 py-2 w-full text-white focus:outline-none focus:bg-opacity-30 placeholder-purple-300 " 
+                type={type} name={name} id={name}
+                value={values[name]}
+                placeholder={placeholder}
+                onChange={(e) => handleInput(e) }
+                />
+                {icon && <span className="absolute font-bold text-md left-2 bottom-2 text-purple-900 rounded-full">$</span>}
+            </label>
+        </div>
+    )
+}
+
+InputField.defaultProps = {
+    placeholder: "",
+    icon: ""
+}
 
 export default Dashboard

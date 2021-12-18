@@ -1,5 +1,4 @@
 import { createContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const GlobalContext = createContext({
   // showModal: false,
@@ -11,8 +10,6 @@ const GlobalContext = createContext({
 });
 
 export const GlobalContextProvider = (props) => {
-  let navigate = useNavigate();
-
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [testVehicleData] = useState("123456789");
@@ -25,9 +22,10 @@ export const GlobalContextProvider = (props) => {
       setIsLoggedIn(true);
     }
 
-    // return () => {
-    //   setIsLoggedIn(false);
-    // };
+    return () => {
+      localStorage.setItem("isLoggedIn", "0");
+      setIsLoggedIn(false);
+    };
   }, []);
 
   const handleModalClose = () => setShowModal(false);
@@ -53,16 +51,11 @@ export const GlobalContextProvider = (props) => {
       let result = await response.userDetails;
       localStorage.setItem("isLoggedIn", "1");
       setUserInfo(result);
-      navigate(`/buyer/:id`);
-
-      console.log(isLoggedIn);
-      console.log(result._id);
-
-      return console.log(userInfo._id);
     }
   };
 
   const handleLogout = () => {
+    localStorage.setItem("isLoggedIn", "0");
     setIsLoggedIn(false);
   };
 
