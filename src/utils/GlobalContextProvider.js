@@ -1,12 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 
 const GlobalContext = createContext({
-  // showModal: false,
   userDetails: {},
-  // testVehicleData: "123456789",
-  // isLoggedIn: false,
-  // onLogout: () => {},
-  // onLogin: (email, password) => {},
 });
 
 export const GlobalContextProvider = (props) => {
@@ -23,7 +18,7 @@ export const GlobalContextProvider = (props) => {
     }
 
     return () => {
-      localStorage.setItem("isLoggedIn", "0");
+      localStorage.removeItem("isLoggedIn");
       setIsLoggedIn(false);
     };
   }, []);
@@ -50,12 +45,14 @@ export const GlobalContextProvider = (props) => {
       response = await response.json();
       let result = await response.userDetails;
       localStorage.setItem("isLoggedIn", "1");
+      localStorage.setItem("username", result.username);
       setUserInfo(result);
     }
   };
 
   const handleLogout = () => {
-    localStorage.setItem("isLoggedIn", "0");
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("username");
     setIsLoggedIn(false);
   };
 
