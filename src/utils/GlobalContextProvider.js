@@ -15,7 +15,6 @@ export const GlobalContextProvider = (props) => {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [becomeSellerModal, setBecomeSellerModal] = useState(false);
   const [testVehicleData] = useState("123456789");
   const [userInfo, setUserInfo] = useState({});
 
@@ -27,7 +26,6 @@ export const GlobalContextProvider = (props) => {
     }
 
     return () => {
-      setBecomeSellerModal(false)
       localStorage.setItem("isLoggedIn", "0")
       setIsLoggedIn(false);
     };
@@ -77,8 +75,6 @@ export const GlobalContextProvider = (props) => {
         testVehicleData: testVehicleData,
         setShowModal: setShowModal,
         handleModalClose: handleModalClose,
-        becomeSellerModal: becomeSellerModal,
-        setSellerModal: setBecomeSellerModal,
         onLogin: handleLogin,
         onLogout: handleLogout,
         handleUserdetails: handleUserdetails,

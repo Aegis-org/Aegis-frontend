@@ -1,11 +1,8 @@
-import { useState, useContext } from 'react'
-import GlobalContext from '../../../utils/GlobalContextProvider'
+import { useState } from 'react'
 import ProfileButton from "../../../components/ProfileButton";
 import { IoClose } from 'react-icons/io5';
 
-const BecomeSeller = () => {
-
-    const user = useContext(GlobalContext)
+const BecomeSeller = ({sellerModal, setSellerModal}) => {
 
     const initialState = {
         businessName: '',
@@ -15,6 +12,7 @@ const BecomeSeller = () => {
         companySize: 0
     }
     const [values, setValues] = useState(initialState)
+    // const [sellerModal, setSellerModal] = useState(false)
 
 
     const handleInput = (e) => {
@@ -29,10 +27,10 @@ const BecomeSeller = () => {
     
     return (
         <>
-            <div className='top-0 left-0 w-screen h-screen fixed bg-black bg-opacity-80 z-10' onClick={() => user.setSellerModal(false)}>
+            <div className={`top-0 left-0 w-screen h-screen fixed bg-black bg-opacity-80 z-10 ${sellerModal ? 'visible' : 'hidden'}`} onClick={() => setSellerModal(false)}>
             </div>
-            <div className='fixed rounded-lg seller-modal-form px-10 pb-10 bg-white z-20'>
-                <IoClose size='1.758rem' className='absolute z-20 right-1 top-1 text-red-600 cursor-pointer hover:text-red-400' onClick={() => user.setSellerModal(false)}/>
+            <div className={`fixed rounded-lg seller-modal-form px-10 pb-10 bg-white z-20 ${sellerModal ? 'visible' : 'hidden'}`}>
+                <IoClose size='1.758rem' className='absolute z-20 right-1 top-1 text-red-600 cursor-pointer hover:text-red-400' onClick={() => setSellerModal(false)}/>
                 <h1 className='text-lg font-bold text-center text-gray-600 mt-8'>Sell With <span className='text-2xl text-pry-clr'>AIGIS</span> </h1>
                 <hr className='mt-2 mb-8 bg-blue-300'/>
                 <form className="w-full h-full flex flex-col gap-y-4" onSubmit={(e) => submitHandler(e)}>
