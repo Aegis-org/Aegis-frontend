@@ -7,24 +7,6 @@ import defaultVehicleImage from "../../../assets/product-mercedes.png";
 import { validFileType, returnFileSize } from "./imageValidation";
 
 const Dashboard = () => {
-  const user = users[0];
-  const screen = useGetScreenBreakPoint();
-  const imageRef = useRef(null);
-
-  const initialState = {
-    image: {},
-    type: "",
-    model: "",
-    year: "",
-    mileage: "",
-    location: "",
-    price: "",
-    engineNumber: "",
-    vin: "",
-    fuel: "",
-  };
-
-const Dashboard = () => {
     const user = users[0]
     const screen = useGetScreenBreakPoint()
     const imageRef = useRef(null)
