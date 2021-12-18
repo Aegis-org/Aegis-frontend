@@ -18,21 +18,43 @@ const VerifyInput = (props) => {
     setInputValue(e.target.value);
   };
 
-  const handleVerify = (e) => {
+  const handleVerify = async (e) => {
     e.preventDefault();
+
+    let url =
+      "https://aigis-backend-api.herokuapp.com/api/users/vehicles/verify";
+
+    let options = {
+      method: "POST",
+      headers: { "Content-Type": "application/json; charset=UTF-8" },
+      body: JSON.stringify({ vin: value }),
+    };
+
     if (value === "") {
       setError(true);
       ctx.setShowModal(false);
-    } else if (value === ctx.testVehicleData) {
-      setShow(() => true);
-      ctx.setShowModal(() => true);
-      setInputValue(() => "");
-      console.log("verified!");
     } else {
-      setShow(() => false);
-      ctx.setShowModal(() => true);
-      setInputValue(() => "");
-      console.log("Not verified!");
+      let response = await fetch(url, options);
+
+      if (response.status === 201) {
+        console.log(response.statusText);
+        response = await response.json();
+        if (!response.status) {
+          console.log(response.status);
+          setShow(() => false);
+          ctx.setShowModal(() => true);
+          setInputValue(() => "");
+          console.log("Not verified!");
+        } else {
+          console.log(response.status);
+          setShow(() => true);
+          ctx.setShowModal(() => true);
+          setInputValue(() => "");
+          console.log("verified!");
+        }
+      } else {
+        console.log(response.status);
+      }
     }
   };
 

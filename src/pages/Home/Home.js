@@ -38,7 +38,7 @@ const Home = () => {
           setShowModal={ctx.setShowModal}
           setShow={setShow}
           testVehicleData={ctx.testVehicleData}
-          placeholder="Enter Vin number (Test by typing: 123456789)"
+          placeholder="Enter Vin number (Test: 1234534829)"
           btn="Verify car now!"
           btnStyles="font-semibold rounded-lg p-3"
           inputStyles="pl-4 py-4 bg-transparent"
@@ -98,7 +98,7 @@ const Home = () => {
             setShowModal={ctx.setShowModal}
             setShow={setShow}
             testVehicleData={ctx.testVehicleData}
-            placeholder="Enter Vin number (Test by typing: 123456789)"
+            placeholder="Enter Vin number (Test: 1234534829)"
             btn="Verify car now!"
             btnStyles="font-semibold rounded-lg p-3"
             inputStyles="pl-4 py-4 bg-transparent"
