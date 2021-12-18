@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Route, Routes } from "react-router-dom";
 import DynamicHeader from "./components/DynamicHeader";
 import BuyerDashboard from "./pages/Dashboard/BuyerDashboard/BuyerDashboard";
@@ -7,13 +7,9 @@ import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import MarketGallery from "./pages/MarketGallery/MarketGallery";
 import SignUp from "./pages/signup/SignUp";
-import GlobalContext, {
-  GlobalContextProvider,
-} from "./utils/GlobalContextProvider";
+import { GlobalContextProvider } from "./utils/GlobalContextProvider";
 
 const Main = () => {
-  const ctx = useContext(GlobalContext);
-
   return (
     <GlobalContextProvider>
       <DynamicHeader />
