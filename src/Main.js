@@ -18,13 +18,14 @@ const Main = () => {
     <GlobalContextProvider>
       <DynamicHeader />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />}>
+          <Route path="/home" element={<Home />} />
+        </Route>
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/gallery" element={<MarketGallery />} />
 
-        <Route path="/buyer:id" element={<BuyerDashboard />} />
+        <Route path="/buyer/:id" element={<BuyerDashboard />} />
         <Route path="/seller/:id" element={<SellerDashboard />} />
       </Routes>
     </GlobalContextProvider>
