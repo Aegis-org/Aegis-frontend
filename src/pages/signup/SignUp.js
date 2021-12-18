@@ -1,13 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import Car from "../../assets/vector-car.png";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import { TextFields } from "../../components/TextFields";
 import * as Yup from "yup";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import GlobalContext from "../../utils/GlobalContextProvider";
 
 const SignUp = () => {
-  const ctx = useContext(GlobalContext);
   const navigate = useNavigate();
 
   const onFormSubmit = async (values) => {
