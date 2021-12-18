@@ -6,7 +6,7 @@ import Loginvalidate from "./Loginvalidate";
 
 const Login = () => {
   const user = useContext(GlobalContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [value, setValue] = useState({
     email: "",
@@ -31,7 +31,9 @@ const Login = () => {
 
   useEffect(() => {
     if (user.isLoggedIn && user.userInfo._id) {
-      navigate(`/${user.userInfo.isSeller ? 'seller' : 'buyer' }/${user.userInfo._id}`);
+      navigate(
+        `/${user.userInfo.isSeller ? "seller" : "buyer"}/${user.userInfo._id}`
+      );
     }
   }, [user, navigate])
 

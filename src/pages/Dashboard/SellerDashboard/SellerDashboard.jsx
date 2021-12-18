@@ -3,11 +3,26 @@ import Profile from "../../../components/Profile";
 import { useGetScreenBreakPoint } from "../../../hooks/useGetScreenBreakPoint";
 import { users } from "../../../utils/DummyProductData";
 import ProfileButton from "../../../components/ProfileButton";
-import defaultVehicleImage from "../../../assets/product-mercedes.png"
+import defaultVehicleImage from "../../../assets/product-mercedes.png";
 import { validFileType, returnFileSize } from "./imageValidation";
 
-import axios from "axios";
+const Dashboard = () => {
+  const user = users[0];
+  const screen = useGetScreenBreakPoint();
+  const imageRef = useRef(null);
 
+  const initialState = {
+    image: {},
+    type: "",
+    model: "",
+    year: "",
+    mileage: "",
+    location: "",
+    price: "",
+    engineNumber: "",
+    vin: "",
+    fuel: "",
+  };
 
 const Dashboard = () => {
     const user = users[0]
@@ -29,31 +44,30 @@ const Dashboard = () => {
         vehicleNumber: '',
         fuel: ''
     }
-
     const handleInput = (e) => {
-        const name = e.target.name
-        const value = e.target.value
-        setValues({...values, [name]: value})
-    }
+        const name = e.target.name;
+        const value = e.target.value;
+        setValues({ ...values, [name]: value });
+    };
 
     const updateImage = () => {
-        const imageFile = imageRef.current.files[0]
-        
-        if (!imageFile) return
+        const imageFile = imageRef.current.files[0];
+
+        if (!imageFile) return;
         if (validFileType(imageFile)) {
-            const size = returnFileSize(imageFile.size)
-            const url = URL.createObjectURL(imageFile)
-            console.log(imageFile, size)
-            setImage({ imageFile, error:"", url:url, size: size })
+        const size = returnFileSize(imageFile.size);
+        const url = URL.createObjectURL(imageFile);
+        console.log(imageFile, size);
+        setImage({ imageFile, error: "", url: url, size: size });
         } else {
-            setImage({error: 'Invalid file type'})
+        setImage({ error: "Invalid file type" });
         }
-    }
+    };
 
     const clearForm = () => {
-        setValues(initialState)
-        setImage({})
-    }
+        setValues(initialState);
+        setImage({});
+    };
 
     const submitHandler = async (e) => {
 
@@ -231,32 +245,39 @@ const Dashboard = () => {
                     </form>
                 </div>
             </div>
-            { !screen.match(/^(sm|md|lg)$/) && <div className="dashboard-divider md:pl-8"><Profile className="" user={user} dashboard={'seller'}/></div> }
+            { !screen.match(/^(sm|md|lg)$/) && <div className="dashboard-divider md:pl-8"><Profile /></div> }
         </div>
-    )
-}
+  );
+};
 
-const InputField = ({ text, type, name, values, placeholder, handleInput, icon}) => {
-    return (
-        <div className="flex flex-col w-full">
-            <label htmlFor={name} className="relative">
-                {text}
-                <input className="bg-white bg-opacity-50 rounded-xl font-medium mt-1 px-4 pl-5 py-2 w-full text-white focus:outline-none focus:bg-opacity-30 placeholder-purple-300 " 
-                type={type} name={name} id={name}
-                value={values[name]}
-                placeholder={placeholder}
-                onChange={(e) => handleInput(e) }
-                required
-                />
-                {icon && <span className="absolute font-bold text-md left-2 bottom-2 text-purple-900 rounded-full">$</span>}
-            </label>
-        </div>
-    )
-}
+const InputField = ({ text, type, name, values, placeholder, handleInput, icon }) => {
+  return (
+    <div className="flex flex-col w-full">
+      <label htmlFor={name} className="relative">
+        {text}
+        <input
+          className="bg-white bg-opacity-50 rounded-xl font-medium mt-1 px-4 pl-5 py-2 w-full text-white focus:outline-none focus:bg-opacity-30 placeholder-purple-300 "
+          type={type}
+          name={name}
+          id={name}
+          value={values[name]}
+          placeholder={placeholder}
+          onChange={(e) => handleInput(e)}
+          required
+        />
+        {icon && (
+          <span className="absolute font-bold text-md left-2 bottom-2 text-purple-900 rounded-full">
+            $
+          </span>
+        )}
+      </label>
+    </div>
+  );
+};
 
 InputField.defaultProps = {
-    placeholder: "",
-    icon: ""
-}
+  placeholder: "",
+  icon: "",
+};
 
-export default Dashboard
+export default Dashboard;
