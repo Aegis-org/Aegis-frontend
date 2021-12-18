@@ -6,22 +6,24 @@ import { IoWarningOutline } from "react-icons/io5";
 import { MdPhoneInTalk } from "react-icons/md";
 import { MdOutlineLogout } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useRef } from "react";
 import GlobalContext from "../utils/GlobalContextProvider";
 
 // passing dummy user data. If there's a global user object from useContext, pass that instead
 // if the profile component is being used in a route other than dashboard, then don't pass the dashboard prop
 // the default prop means by default it is report a seller, only in the seller dahboard is it report a buyer
 
-const Profile = ({setSellerModal}) => {
+const Profile = ({ setSellerModal }) => {
   const user = useContext(GlobalContext);
-  let userType = 'buyer';
-  
+
+  const userType = useRef("buyer");
+
+  // let userType = 'buyer';
   useEffect(() => {
-      if (user.userInfo.isSeller) {
-          userType = 'seller'
-      }
-  }, [user])
+    if (user.userInfo.isSeller) {
+      userType.current = "seller";
+    }
+  }, [user]);
 
   return (
     <div className="flex flex-col space-y-8">
@@ -32,7 +34,7 @@ const Profile = ({setSellerModal}) => {
           icon={<HiOutlinePencil size="1.5rem" className="absolute left-8" />}
         />
       </Link>
-      {userType === "seller" && (
+      {userType.current === "seller" && (
         <ProfileButton
           text={"My Vehicles"}
           icon={<IoCarSportSharp size="1.5rem" className="absolute left-8" />}
@@ -40,7 +42,7 @@ const Profile = ({setSellerModal}) => {
         ></ProfileButton>
       )}
       <ProfileButton
-        text={`Report a ${userType === "seller" ? 'buyer' : 'seller'}`}
+        text={`Report a ${userType.current === "seller" ? "buyer" : "seller"}`}
         icon={
           <IoWarningOutline
             size="1.5rem"
@@ -66,7 +68,7 @@ const Profile = ({setSellerModal}) => {
         bgColor={"bg-red-500"}
         textColor="text-white"
       ></ProfileButton>
-      {userType === "buyer" && (
+      {userType.current === "buyer" && (
         <ProfileButton
           text={"Become a Seller"}
           bgColor={"bg-pry-clr"}
