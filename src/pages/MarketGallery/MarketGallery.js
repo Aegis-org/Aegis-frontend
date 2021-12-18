@@ -64,7 +64,7 @@ const MarketGallery = () => {
           <FiSearch />
         </button>
       </form>
-      <main className="border border-green-700 ">
+      <main className="">
         <section className="grid lg:grid-cols-3 md:grid-cols-2 gap-x-8 md:mx-4 justify-center gap-y-16">
           {products.map((product) => {
             return (
