@@ -13,7 +13,7 @@ import GlobalContext from "../utils/GlobalContextProvider";
 // if the profile component is being used in a route other than dashboard, then don't pass the dashboard prop
 // the default prop means by default it is report a seller, only in the seller dahboard is it report a buyer
 
-const Profile = () => {
+const Profile = ({setSellerModal}) => {
   const user = useContext(GlobalContext);
   let userType = 'buyer';
   
@@ -71,6 +71,7 @@ const Profile = () => {
           text={"Become a Seller"}
           bgColor={"bg-pry-clr"}
           textColor="text-white"
+          onClick={() => setSellerModal(true)}
         />
       )}
     </div>

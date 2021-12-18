@@ -5,12 +5,15 @@ import { BsXLg } from "react-icons/bs";
 import { products } from "../../../utils/DummyProductData";
 import MarketGalleryCard from "../../../components/MarketGalleryCard";
 import Profile from "../../../components/Profile";
+import BecomeSeller from "./BecomeSeller";
+
 import { Link, Navigate } from "react-router-dom";
 
 const BuyerDashboard = () => {
   const ctx = useContext(GlobalContext);
 
   const [value, setValue] = useState("");
+  const [sellerModal, setSellerModal] = useState(false);
 
   const handleInput = (e) => {
     setValue(e.target.value);
@@ -27,6 +30,7 @@ const BuyerDashboard = () => {
 
   return (
     <>
+      <BecomeSeller sellerModal={sellerModal} setSellerModal={setSellerModal} />
       <div className="text-pry-clr text-lg font-semibold px-4 py-4 max-w-6xl mx-auto">
         Welcome,
         <span className="text-white bg-pry-clr px-6 py-1 ml-4">
@@ -83,21 +87,11 @@ const BuyerDashboard = () => {
           </div>
         </div>
         <aside className="RHS-content hidden xl:block w-80 md:w-56 h-5/6 mt-14 ml-auto">
-          <Profile />
+          <Profile setSellerModal={setSellerModal} />
         </aside>
       </section>
     </>
   );
 };
-
-
-// export const sellerModal = () => {
-//   const [sellerDetails, setSellerDetails] = useState({})
-//   return (
-//     <div>
-
-//     </div>
-//   )
-// }
 
 export default BuyerDashboard;
