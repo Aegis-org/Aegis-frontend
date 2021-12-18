@@ -7,6 +7,18 @@ import { Navigate } from "react-router-dom";
 
 const MarketGallery = () => {
   const ctx = useContext(GlobalContext);
+  const initialState = {
+    image: {},
+    type: "",
+    model: "",
+    year: "",
+    mileage: "",
+    location: "",
+    price: "",
+    engineNumber: "",
+    vin: "",
+    fuel: "",
+  };
 
   if (!ctx.isLoggedIn) {
     return <Navigate to="/login" />;
