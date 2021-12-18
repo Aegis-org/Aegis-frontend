@@ -5,7 +5,10 @@ import { BsXLg } from "react-icons/bs";
 import { products } from "../../../utils/DummyProductData";
 import MarketGalleryCard from "../../../components/MarketGalleryCard";
 import Profile from "../../../components/Profile";
+import BecomeSeller from "./BecomeSeller";
+
 import { Navigate } from "react-router-dom";
+
 
 const BuyerDashboard = () => {
   const ctx = useContext(GlobalContext);
@@ -27,6 +30,7 @@ const BuyerDashboard = () => {
 
   return (
     <>
+      {ctx.becomeSellerModal && <BecomeSeller/>}
       <div className="text-pry-clr text-lg font-semibold px-4 py-4 max-w-6xl mx-auto">
         Welcome,
         <span className="text-white bg-pry-clr px-6 py-1 ml-4">
@@ -83,18 +87,9 @@ const BuyerDashboard = () => {
           <Profile />
         </aside>
       </section>
+      
     </>
   );
 };
-
-
-// export const sellerModal = () => {
-//   const [sellerDetails, setSellerDetails] = useState({})
-//   return (
-//     <div>
-
-//     </div>
-//   )
-// }
 
 export default BuyerDashboard;

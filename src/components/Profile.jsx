@@ -71,6 +71,7 @@ const Profile = () => {
           text={"Become a Seller"}
           bgColor={"bg-pry-clr"}
           textColor="text-white"
+          onClick={() => user.setSellerModal(true)}
         />
       )}
     </div>
