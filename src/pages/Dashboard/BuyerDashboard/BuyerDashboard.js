@@ -8,20 +8,58 @@ import Profile from "../../../components/Profile";
 import BecomeSeller from "./BecomeSeller";
 
 import { Link, Navigate } from "react-router-dom";
+import VerifyCar from "./VerifyCar";
 
 const BuyerDashboard = () => {
   const ctx = useContext(GlobalContext);
 
   const [value, setValue] = useState("");
   const [sellerModal, setSellerModal] = useState(false);
+  const [showVerifyCar, setShowVerifyCar] = useState({
+    verified: false,
+    show: false,
+  });
 
   const handleInput = (e) => {
     setValue(e.target.value);
   };
 
-  const handleVerify = (e) => {
+  const handleVerify = async (e) => {
     e.preventDefault();
-    setValue(() => "");
+
+    let url =
+      "https://aigis-backend-api.herokuapp.com/api/users/vehicles/verify";
+
+    let options = {
+      method: "POST",
+      headers: { "Content-Type": "application/json; charset=UTF-8" },
+      body: JSON.stringify({ vin: value }),
+    };
+
+    if (value === "") {
+      setShowVerifyCar({ ...showVerifyCar, show: false, verified: false });
+      return;
+    } else {
+      let response = await fetch(url, options);
+
+      if (response.status === 201) {
+        console.log(response.statusText);
+        response = await response.json();
+        if (!response.status) {
+          console.log(response);
+          setShowVerifyCar({ ...showVerifyCar, show: true });
+          setValue(() => "");
+          console.log("Not verified!");
+        } else {
+          console.log(response);
+          setShowVerifyCar({ ...showVerifyCar, show: true, verified: true });
+          setValue(() => "");
+          console.log("verified!");
+        }
+      } else {
+        console.log(response.status);
+      }
+    }
   };
 
   if (!ctx.isLoggedIn) {
@@ -67,6 +105,17 @@ const BuyerDashboard = () => {
                 Verify
               </button>
             </form>
+            {showVerifyCar.show && (
+              <VerifyCar
+                message={
+                  showVerifyCar.verified
+                    ? "Valid and Assigned to a Vehicle!"
+                    : "Vehicle Not Valid!"
+                }
+                showVerifyCar={showVerifyCar}
+                setShowVerifyCar={setShowVerifyCar}
+              />
+            )}
           </div>
           <div className="Gallery grid justify-center items-center my-6 sm:mt-16 gap-y-6 gap-x-8 sm:gap-y-10 sm:grid-cols-2 w-full">
             {products.slice(0, 4).map((product) => {
