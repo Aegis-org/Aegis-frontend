@@ -1,11 +1,14 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import ProfileButton from "../../../components/ProfileButton";
 import { IoClose } from 'react-icons/io5';
+import GlobalContext from '../../../utils/GlobalContextProvider';
 
 const BecomeSeller = ({sellerModal, setSellerModal}) => {
 
+    const user = useContext(GlobalContext)
+
     const initialState = {
-        businessName: '',
+        companyName: '',
         businessEmail: '',
         cacNumber: '',
         address: '',
@@ -21,8 +24,26 @@ const BecomeSeller = ({sellerModal, setSellerModal}) => {
         setValues({...values, [name]: value})
     }
 
-    const submitHandler = (e) => {
+    const submitHandler = async(e) => {
         e.preventDefault()
+
+        console.log(user.userInfo._id)
+        const response = await fetch(
+            "https://aigis-backend-api.herokuapp.com/api/users/edit",
+            {
+                method: "PUT",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: user.userInfo._id,
+                    isSeller: true
+                }),
+                redirect: "follow"
+            }
+        )
+        const res = await response.json()
+        console.log(res)
     }
     
     return (

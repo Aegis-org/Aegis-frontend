@@ -59,7 +59,25 @@ export const GlobalContextProvider = (props) => {
     }
   };
 
-  const handleLogout = () => {
+  const handleLogout = async() => {
+
+    const response = await fetch('https://aigis-backend-api.herokuapp.com/api/users/logout',{
+    method: 'POST',
+    body: '',
+    redirect: "follow"
+    })
+    
+    if (response.status === 201) {
+      const res = await response.json()
+
+      console.log(res)
+    }
+
+    else {
+      console.log(response)
+    }
+
+
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("username");
     setIsLoggedIn(false);
