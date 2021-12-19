@@ -9,12 +9,12 @@ const Navbar = () => {
         <div className="logo"></div>
         <div className="font-medium nav-links transition-all">
           <Link to="/home">Home</Link>
-          <Link to="/about">About</Link>
-          <Link to="/services">Services</Link>
-          <Link to="/features">Features</Link>
-          <Link to="/blog">Blog</Link>
-          <Link to="/contact">Contact</Link>
-          <Link to="/help">Help</Link>
+          <Link to="/">About</Link>
+          <Link to="/">Services</Link>
+          <Link to="/">Features</Link>
+          <Link to="/">Blog</Link>
+          <Link to="/">Contact</Link>
+          <Link to="/">Help</Link>
         </div>
         <div className="bttns flex items-center gap-x-8">
           <Link
