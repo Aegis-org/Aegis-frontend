@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
 import Profile from "../../../components/Profile";
 import { useGetScreenBreakPoint } from "../../../hooks/useGetScreenBreakPoint";
 import { users } from "../../../utils/DummyProductData";
@@ -6,12 +6,16 @@ import ProfileButton from "../../../components/ProfileButton";
 import defaultVehicleImage from "../../../assets/product-mercedes.png";
 import { validFileType, returnFileSize } from "./imageValidation";
 import axios from "axios";
+import GlobalContext from "../../../utils/GlobalContextProvider";
+import { Navigate } from "react-router-dom";
 
 const Dashboard = () => {
     const user = users[0]
     const screen = useGetScreenBreakPoint()
     const imageRef = useRef(null)
     const formRef = useRef(null)
+
+    const ctx = useContext(GlobalContext)
 
     const postURL = "https://aigis-backend-api.herokuapp.com/api/users/vehicles/create"
 
@@ -67,57 +71,33 @@ const Dashboard = () => {
         formdata.append('mileage', values.mileage)
         formdata.append('location', values.location)
         formdata.append('vehicleType', values.vehicleType)
+        formdata.append('username', ctx.userInfo.username)
 
         console.log(Array.from(formdata))
-
-        // axios({
-        //     url: "https://aigis-backend-api.herokuapp.com/api/users/vehicles/create",
-        //     method: "POST",
-        //     data: formdata
-        // }).then((res) => {
-
-        // })
-
-        // axios.post("https://aigis-backend-api.herokuapp.com/api/users/vehicles/create", formdata)
-        // .then(res => {
-        //     console.log(res)
-        // })
-
-        try {
-            // make axios post request
-            const response = await axios({
-              method: "post",
-              url: postURL,
-              data: formdata,
-              headers: { "Content-Type": "multipart/form-data" },
-            });
-          } catch(error) {
-            console.log(error)
-          }
         
-        // const response = await fetch(
-        //     "https://aigis-backend-api.herokuapp.com/api/users/vehicles/create",
-        //     {
-        //         method: "POST",
-        //         headers: {
-        //             "Content-Type": "multipart/form-data"
-        //         },
-        //         body: formdata,
-        //     }
-        // )
+        const response = await fetch(
+            "https://aigis-backend-api.herokuapp.com/api/users/vehicles/create",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                },
+                body: formdata
+            }
+        )
 
-        // if (response.status === 200 ) {
-        //     console.log("successful")
+        if (response.status === 200 ) {
+            console.log("successful")
 
-        //     const res = await response.json()
-        //     console.log(res)
-        // }
+            const res = await response.json()
+            console.log(res)
+        }
 
-        // else {
-        //     console.log(response)
-        //     const error = await response.json()
-        //     console.log(error)
-        // }
+        else {
+            console.log(response)
+            const error = await response.json()
+            console.log(error)
+        }
 
         // console.log('formSubmitted')
     }
@@ -132,6 +112,10 @@ const Dashboard = () => {
     {text: 'Location', type:'text', name: 'location', placeholder:'Current address', halfSpan:false}
     ]
     const fuelOptions = ['petroleum', 'diesel', 'hydrogen', 'electricity']
+
+    if (!ctx.isLoggedIn) {
+        return <Navigate to="/login" />;
+    }
 
     return (
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-2 gap-y-4 justify-between my-5 md:my-20 px-2">
@@ -167,7 +151,7 @@ const Dashboard = () => {
                         {/* <InputField text={'Car Model'} type={'text'} name={'model'} />
                         <InputField text={'Year'} type={'text'} name={'year'} /> */}
                         {carDetailsForm.map(input => (
-                            <div className={`col-span-2 md:${input.halfSpan && 'col-span-1'}`}>
+                            <div key={input.name} className={`col-span-2 md:${input.halfSpan && 'col-span-1'}`}>
                                 <label className="font-semibold mb-1 pl-2" htmlFor={input.name}>{input.text}</label>
                                 <input 
                                 className="bg-pry-accent rounded-xl font-medium text-base p-2 w-full text-gray-800" 

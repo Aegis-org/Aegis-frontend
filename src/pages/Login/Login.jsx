@@ -64,7 +64,6 @@ const Login = () => {
               type="email"
               className="border-2 p-2 text-black rounded-md border-pry-clr hover:bg-pry-accent w-2/3 transition-colors"
               name="email"
-              id=""
               value={value.email}
               onChange={handleChange}
               placeholder="Example@mail.com"
@@ -87,7 +86,6 @@ const Login = () => {
               type="password"
               className="border-2 p-2 text-black w-2/3 border-pry-clr rounded-md hover:bg-pry-accent transition-colors"
               name="password"
-              id=""
               value={value.password}
               onChange={handleChange}
               placeholder="**********"
