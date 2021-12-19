@@ -21,8 +21,27 @@ const BecomeSeller = ({sellerModal, setSellerModal}) => {
         setValues({...values, [name]: value})
     }
 
-    const submitHandler = (e) => {
+    const submitHandler = async(e) => {
         e.preventDefault()
+
+        try {
+            const response = await fetch(
+                "https://aigis-backend-api.herokuapp.com/api/users/edit",
+                {
+                    method: "PUT",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        isSeller: true
+                    })
+                }
+            )
+            const res = await response.json()
+            console.log(res)
+        } catch (error) {
+            console.log('error form try/catch: ', error)
+        }
     }
     
     return (

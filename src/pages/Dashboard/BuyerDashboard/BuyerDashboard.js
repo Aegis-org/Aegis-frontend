@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
 import GlobalContext from "../../../utils/GlobalContextProvider";
 
 import { BsXLg } from "react-icons/bs";

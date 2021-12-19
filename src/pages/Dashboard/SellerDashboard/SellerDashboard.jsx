@@ -5,6 +5,7 @@ import { users } from "../../../utils/DummyProductData";
 import ProfileButton from "../../../components/ProfileButton";
 import defaultVehicleImage from "../../../assets/product-mercedes.png";
 import { validFileType, returnFileSize } from "./imageValidation";
+import axios from "axios";
 
 const Dashboard = () => {
     const user = users[0]
