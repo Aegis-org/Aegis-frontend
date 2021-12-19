@@ -79,7 +79,7 @@ const MarketGallery = () => {
           })}
           {show && (
             <div
-              className="fixed top-0 left-0 w-full h-full z-20"
+              className="fixed top-0 left-0  w-screen h-screen z-20 flex justify-center items-center"
               style={{ background: "rgba(0, 0, 0, 0.6)" }}
             >
               <Modal productInfo={productInfo} setShow={setShow} />
@@ -98,12 +98,13 @@ const MarketGallery = () => {
 
 const Modal = ({ productInfo, setShow }) => {
   return (
-    <div className="absolute top-0 left-1/2 transform -translate-y-2/2 w-max -translate-x-1/2">
+    <div className="flex justify-center items-center">
       <div className="flex flex-col justify-start pt-4 gap-y-8 px-4 bg-pry-accent rounded-2xl h-min">
-        <button onClick={() => setShow(false)}>
-          <span className="ml-auto mr-4 text-red-500 text-4xl w-min">
-            <AiFillCloseCircle />
-          </span>
+        <button
+          className="text-right w-min ml-auto bg-white rounded-full text-3xl text-red-600 border border-red-400"
+          onClick={() => setShow(false)}
+        >
+          <AiFillCloseCircle />
         </button>
         <div className="flex justify-between p-4 text-pry-clr font-semibold">
           <p className="font-bold">Location:</p>
