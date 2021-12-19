@@ -31,7 +31,8 @@ export const text = [
   {
     title: "Buying a used car?",
     text: "Avoid the unwanted surprises down the line - VinDocs provides the most comprehensive, insightful, and up-to-date car history reports for used cars in Nigeria",
-    subtitle: "Enter your vin number to get a full report of the car instantly",
+    subtitle:
+      "Enter your vin number to get a verfication report of the car instantly",
     image: vectorCar,
   },
   {

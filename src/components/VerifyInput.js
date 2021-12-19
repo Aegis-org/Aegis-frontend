@@ -9,18 +9,18 @@ const VerifyInput = (props) => {
     props;
 
   const [inputValue, setInputValue] = useState("");
-  const [error, setError] = useState(false);
+  const [error, setError] = useState({ error: false, loading: false });
 
   let value = inputValue.toString().toLowerCase();
 
   const handleInput = (e) => {
-    setError(false);
+    setError({ ...error, error: false, loading: false });
     setInputValue(e.target.value);
   };
 
   const handleVerify = async (e) => {
     e.preventDefault();
-
+    setError({ ...error, error: false, loading: true });
     let url =
       "https://aigis-backend-api.herokuapp.com/api/users/vehicles/verify";
 
@@ -31,12 +31,13 @@ const VerifyInput = (props) => {
     };
 
     if (value === "") {
-      setError(true);
+      setError({ ...error, error: true, loading: false });
       ctx.setShowModal(false);
     } else {
       let response = await fetch(url, options);
 
       if (response.status === 200) {
+        setError({ ...error, loading: false });
         console.log(response.statusText);
         response = await response.json();
         if (!response.status) {
@@ -88,9 +89,19 @@ const VerifyInput = (props) => {
           {btn}
         </button>
       </form>
-      {error && (
-        <p className="font-montserrart text-sm text-red-600 font-medium absolute -top-1/2 left-1/4">
-          Please enter a valid plate number!
+      {(error.error || error.loading) && (
+        <p
+          className={`font-montserrart absolute -top-1/2 ${
+            error.loading
+              ? "font-semibold text-lg text-pry-clr left-44"
+              : "font-medium text-red-600 text-sm left-1/4"
+          }`}
+        >
+          {error.error
+            ? "Please enter a valid plate number!"
+            : error.loading
+            ? "Please wait ...."
+            : ""}
         </p>
       )}
     </div>
