@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import car from "../../assets/signup-vector-car.png";
+import Spinner from "../../components/Spinner";
 import GlobalContext from "../../utils/GlobalContextProvider";
 import Loginvalidate from "./Loginvalidate";
 
@@ -35,7 +36,7 @@ const Login = () => {
         `/${user.userInfo.isSeller ? "seller" : "buyer"}/${user.userInfo._id}`
       );
     }
-  }, [user, navigate])
+  }, [user, navigate]);
 
   return (
     <div className="bg-fade-bg p-8 max-w-6xl mx-auto bg-pry-accent grid justify-center">
@@ -52,6 +53,11 @@ const Login = () => {
         <p className="text-black font-normal text-sm">
           Kindly fill in your details correctly to login
         </p>
+        {user.login.loading && (
+          <div className="fixed top-0 left-0 w-screen h-screen flex justify-center items-center bg-gray-600 opacity-50">
+            <Spinner />
+          </div>
+        )}
         <form onSubmit={handleSubmit} method="post" className="mt-20">
           <div className="flex flex-row mt-10 mr-auto gap-x-8">
             <label
