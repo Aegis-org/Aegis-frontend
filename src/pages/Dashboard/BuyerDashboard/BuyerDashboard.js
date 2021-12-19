@@ -18,6 +18,7 @@ const BuyerDashboard = () => {
   const [showVerifyCar, setShowVerifyCar] = useState({
     verified: false,
     show: false,
+    details: [],
   });
 
   const handleInput = (e) => {
@@ -33,27 +34,35 @@ const BuyerDashboard = () => {
     let options = {
       method: "POST",
       headers: { "Content-Type": "application/json; charset=UTF-8" },
-      body: JSON.stringify({ vin: value }),
+      body: JSON.stringify({ vin: value, id: ctx.userInfo._id }),
     };
 
     if (value === "") {
       setShowVerifyCar({ ...showVerifyCar, show: false, verified: false });
       return;
     } else {
+      setShowVerifyCar({ ...showVerifyCar, verified: false, show: false });
       let response = await fetch(url, options);
 
-      if (response.status === 201) {
+      if (response.status === 200) {
         console.log(response.statusText);
         response = await response.json();
         if (!response.status) {
           console.log(response);
-          setShowVerifyCar({ ...showVerifyCar, show: true });
+          setShowVerifyCar({ ...showVerifyCar, show: true, verified: false });
           setValue(() => "");
           console.log("Not verified!");
         } else {
-          console.log(response);
-          setShowVerifyCar({ ...showVerifyCar, show: true, verified: true });
+          const details = response.details.data;
+          console.log(details);
+          setShowVerifyCar({
+            ...showVerifyCar,
+            show: true,
+            verified: true,
+            details: details,
+          });
           setValue(() => "");
+          console.log(showVerifyCar.details);
           console.log("verified!");
         }
       } else {

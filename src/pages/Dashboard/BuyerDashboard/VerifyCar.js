@@ -25,15 +25,15 @@ const VerifyCar = (props) => {
           </div>
           <div className="flex justify-between gap-x-4 font-medium mb-2">
             <p className="font-normal">Vehicle number:</p>
-            <p>1234534829</p>
+            <p>{showVerifyCar.details.vehicle_number}</p>
           </div>
           <div className="flex justify-between gap-x-4 font-medium mb-2">
             <p className="font-normal">Vehicle color:</p>
-            <p>Red</p>
+            <p>{showVerifyCar.details.vehicle_color}</p>
           </div>
           <div className="flex justify-between gap-x-4 font-medium mb-2">
             <p className="font-normal">Vehicle name:</p>
-            <p>Toyota</p>
+            <p>{showVerifyCar.details.vehicle_name}</p>
           </div>
         </div>
       )}
