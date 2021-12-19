@@ -74,6 +74,11 @@ const Login = () => {
             {errors.email && (
               <p className="text-red-700 block">{errors.email}</p>
             )}
+            {user.login.error && (
+              <p className="text-red-700 block">
+                Invalid Email/Username/Password
+              </p>
+            )}
           </div>
           <div className="flex flex-row mt-10 mr-auto gap-x-8">
             <label
@@ -109,7 +114,11 @@ const Login = () => {
               onClick={handleSubmit}
               className="font-bold text-center cursor-pointer mt-4 hover:bg-pry-accent mb-6 text-white rounded-lg p-2 bg-pry-clr w-4/6 transition-colors"
             >
-              Login
+              {!user.userInfo.isLoggedIn &&
+              user.login.loading &&
+              !user.login.error
+                ? "Logging In"
+                : "Login"}
             </button>
           </div>
         </form>

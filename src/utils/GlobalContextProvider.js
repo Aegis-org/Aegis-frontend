@@ -6,6 +6,7 @@ const GlobalContext = createContext({
 
 export const GlobalContextProvider = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [login, setLogin] = useState({ error: false, loading: false });
   const [showModal, setShowModal] = useState(false);
   const [testVehicleData] = useState("123456789");
   const [userInfo, setUserInfo] = useState({});
@@ -26,6 +27,7 @@ export const GlobalContextProvider = (props) => {
   const handleModalClose = () => setShowModal(false);
 
   const handleLogin = async (email, password) => {
+    setLogin({ ...login, error: false, loading: true });
     let response = await fetch(
       "https://aigis-backend-api.herokuapp.com/api/users/login",
       {
@@ -40,13 +42,20 @@ export const GlobalContextProvider = (props) => {
         redirect: "follow",
       }
     );
+
     if (response.status === 200) {
       setIsLoggedIn(true);
+      setLogin({ ...login, error: false, loading: false });
       response = await response.json();
       let result = await response.userDetails;
       localStorage.setItem("isLoggedIn", "1");
       localStorage.setItem("username", result.username);
       setUserInfo(result);
+    } else if (response.status === 400) {
+      response = await response.json();
+      setLogin({ ...login, error: true, loading: false });
+      setIsLoggedIn(false);
+      console.log(response);
     }
   };
 
@@ -54,6 +63,7 @@ export const GlobalContextProvider = (props) => {
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("username");
     setIsLoggedIn(false);
+    setLogin({ ...login, error: false, loading: false });
   };
 
   const handleUserdetails = (info) => {
@@ -64,6 +74,7 @@ export const GlobalContextProvider = (props) => {
     <GlobalContext.Provider
       value={{
         isLoggedIn: isLoggedIn,
+        login: login,
         showModal: showModal,
         userInfo: userInfo,
         testVehicleData: testVehicleData,
