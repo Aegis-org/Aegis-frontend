@@ -54,7 +54,7 @@ const Login = () => {
           Kindly fill in your details correctly to login
         </p>
         {user.login.loading && (
-          <div className="fixed top-0 left-0 w-screen h-screen flex justify-center items-center bg-gray-600 opacity-50">
+          <div className="fixed top-0 left-0 w-screen h-screen flex justify-center items-center bg-gray-600 opacity-50 z-50">
             <Spinner />
           </div>
         )}
