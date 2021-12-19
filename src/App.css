@@ -33,9 +33,9 @@ nav.nav-expand {
 }
 
 .search-bar {
-    flex: 1 1 100%;
-    position: relative;
-    min-width: 100px;
+  flex: 1 1 100%;
+  position: relative;
+  min-width: 100px;
 }
 
 .search-icon {
@@ -81,7 +81,7 @@ nav.nav-expand {
 
 .dashboard-divider::before {
   display: none;
-  content: '';
+  content: "";
   height: 100%;
   width: 2px;
   border-radius: 2px;
@@ -96,6 +96,25 @@ nav.nav-expand {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.spinner {
+  border: 5px solid #eee;
+  border-top: 5px solid rgb(170, 169, 169);
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 0.8s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .homebody-img-wrapper {

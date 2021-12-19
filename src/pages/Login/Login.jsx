@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import car from "../../assets/signup-vector-car.png";
+import Spinner from "../../components/Spinner";
 import GlobalContext from "../../utils/GlobalContextProvider";
 import Loginvalidate from "./Loginvalidate";
 
@@ -52,6 +53,11 @@ const Login = () => {
         <p className="text-black font-normal text-sm">
           Kindly fill in your details correctly to login
         </p>
+        {user.login.loading && (
+          <div className="fixed top-0 left-0 w-screen h-screen flex justify-center items-center bg-gray-600 opacity-50">
+            <Spinner />
+          </div>
+        )}
         <form onSubmit={handleSubmit} method="post" className="mt-20">
           <div className="flex flex-row mt-10 mr-auto gap-x-8">
             <label
@@ -64,7 +70,6 @@ const Login = () => {
               type="email"
               className="border-2 p-2 text-black rounded-md border-pry-clr hover:bg-pry-accent w-2/3 transition-colors"
               name="email"
-              id=""
               value={value.email}
               onChange={handleChange}
               placeholder="Example@mail.com"
@@ -73,6 +78,11 @@ const Login = () => {
           <div className="flex justify-end">
             {errors.email && (
               <p className="text-red-700 block">{errors.email}</p>
+            )}
+            {user.login.error && (
+              <p className="text-red-700 block">
+                Invalid Email/Username/Password
+              </p>
             )}
           </div>
           <div className="flex flex-row mt-10 mr-auto gap-x-8">
@@ -87,7 +97,6 @@ const Login = () => {
               type="password"
               className="border-2 p-2 text-black w-2/3 border-pry-clr rounded-md hover:bg-pry-accent transition-colors"
               name="password"
-              id=""
               value={value.password}
               onChange={handleChange}
               placeholder="**********"
@@ -109,7 +118,11 @@ const Login = () => {
               onClick={handleSubmit}
               className="font-bold text-center cursor-pointer mt-4 hover:bg-pry-accent mb-6 text-white rounded-lg p-2 bg-pry-clr w-4/6 transition-colors"
             >
-              Login
+              {!user.userInfo.isLoggedIn &&
+              user.login.loading &&
+              !user.login.error
+                ? "Logging In"
+                : "Login"}
             </button>
           </div>
         </form>

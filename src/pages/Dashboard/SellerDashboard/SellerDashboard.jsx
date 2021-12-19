@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
 import Profile from "../../../components/Profile";
 import { useGetScreenBreakPoint } from "../../../hooks/useGetScreenBreakPoint";
 import { users } from "../../../utils/DummyProductData";
@@ -6,10 +6,18 @@ import ProfileButton from "../../../components/ProfileButton";
 import defaultVehicleImage from "../../../assets/product-mercedes.png";
 import { validFileType, returnFileSize } from "./imageValidation";
 
+import GlobalContext from "../../../utils/GlobalContextProvider";
+import { Navigate } from "react-router-dom";
+
 const Dashboard = () => {
   const user = users[0];
   const screen = useGetScreenBreakPoint();
   const imageRef = useRef(null);
+  const formRef = useRef(null);
+
+  const ctx = useContext(GlobalContext);
+
+  // const postURL = "https://aigis-backend-api.herokuapp.com/api/users/vehicles/create"
 
   const initialState = {
     image: {},
@@ -17,13 +25,12 @@ const Dashboard = () => {
     model: "",
     year: "",
     mileage: "",
+    color: "",
     location: "",
     price: "",
-    engineNumber: "",
-    vin: "",
+    vehicleNumber: "",
     fuel: "",
   };
-
   const handleInput = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -49,12 +56,47 @@ const Dashboard = () => {
     setImage({});
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    const formdata = new FormData();
-    formdata.append("vehicleNumber");
 
-    console.log("formSubmitted");
+    let formdata = new FormData();
+    formdata.append("vehicleImage", image.imageFile);
+    formdata.append("vehicleName", values.model);
+    formdata.append("vehicleNumber", values.vehicleNumber);
+    formdata.append("vehicleColor", values.color);
+    formdata.append("vehicleMakeYear", values.year);
+    formdata.append("price", values.price);
+    formdata.append("fuel", values.fuel);
+    formdata.append("mileage", values.mileage);
+    formdata.append("location", values.location);
+    formdata.append("vehicleType", values.vehicleType);
+    formdata.append("username", ctx.userInfo.username);
+
+    console.log(Array.from(formdata));
+
+    const response = await fetch(
+      "https://aigis-backend-api.herokuapp.com/api/users/vehicles/create",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        body: formdata,
+      }
+    );
+
+    if (response.status === 200) {
+      console.log("successful");
+
+      const res = await response.json();
+      console.log(res);
+    } else {
+      console.log(response);
+      const error = await response.json();
+      console.log(error);
+    }
+
+    // console.log('formSubmitted')
   };
 
   const [image, setImage] = useState({});
@@ -62,7 +104,7 @@ const Dashboard = () => {
 
   const carDetailsForm = [
     {
-      text: "Car Model",
+      text: "Vehicle Model",
       type: "text",
       name: "model",
       halfSpan: true,
@@ -76,11 +118,18 @@ const Dashboard = () => {
       placeholder: "",
     },
     {
+      text: "Color",
+      type: "text",
+      name: "color",
+      halfSpan: true,
+      placeholder: "",
+    },
+    {
       text: "Mileage",
       type: "number",
       name: "mileage",
+      halfSpan: true,
       placeholder: "Vehicle mileage in KM",
-      halfSpan: false,
     },
     {
       text: "Location",
@@ -91,6 +140,10 @@ const Dashboard = () => {
     },
   ];
   const fuelOptions = ["petroleum", "diesel", "hydrogen", "electricity"];
+
+  if (!ctx.isLoggedIn) {
+    return <Navigate to="/login" />;
+  }
 
   return (
     <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-2 gap-y-4 justify-between my-5 md:my-20 px-2">
@@ -139,6 +192,7 @@ const Dashboard = () => {
                         <InputField text={'Year'} type={'text'} name={'year'} /> */}
             {carDetailsForm.map((input) => (
               <div
+                key={input.name}
                 className={`col-span-2 md:${input.halfSpan && "col-span-1"}`}
               >
                 <label className="font-semibold mb-1 pl-2" htmlFor={input.name}>
@@ -182,6 +236,9 @@ const Dashboard = () => {
         </div>
         <div className="px-5 py-5 bg-pry-clr rounded-xl text-white">
           <form
+            ref={formRef}
+            name="vehicleCreate"
+            id="vehicleCreate"
             className="flex flex-col gap-y-4"
             onSubmit={(e) => submitHandler(e)}
           >
@@ -203,9 +260,9 @@ const Dashboard = () => {
               icon={"$"}
             />
             <InputField
-              text={"Engine Number"}
+              text={"vehicle Number"}
               type={"text"}
-              name={"engineNumber"}
+              name={"vehicleNumber"}
               values={values}
               handleInput={handleInput}
             />
@@ -232,12 +289,13 @@ const Dashboard = () => {
               </select>
             </label>
 
-            <div className="mx-auto mt-4">
+            <div className="mx-auto mt-4 cursor-pointer">
               <button type="submit">
                 <ProfileButton
                   text={"Upload"}
                   textColor={"text-pry-clr"}
                   bgColor={"bg-pry-accent"}
+                  onClick={() => submitHandler}
                 />
               </button>
             </div>
@@ -246,7 +304,7 @@ const Dashboard = () => {
       </div>
       {!screen.match(/^(sm|md|lg)$/) && (
         <div className="dashboard-divider md:pl-8">
-          <Profile className="" user={user} dashboard={"seller"} />
+          <Profile />
         </div>
       )}
     </div>
