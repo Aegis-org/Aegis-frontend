@@ -58,7 +58,12 @@ const Login = () => {
             <Spinner />
           </div>
         )}
-        <form onSubmit={handleSubmit} method="post" className="mt-20">
+        <form onSubmit={handleSubmit} method="post" className="mt-20 relative">
+          {user.login.error && (
+            <p className="text-red-700 block text-center font-medium">
+              Invalid Email/Username/Password
+            </p>
+          )}
           <div className="flex flex-row mt-10 mr-auto gap-x-8">
             <label
               htmlFor="Email Address:"
@@ -75,14 +80,10 @@ const Login = () => {
               placeholder="Example@mail.com"
             />
           </div>
+
           <div className="flex justify-end">
             {errors.email && (
-              <p className="text-red-700 block">{errors.email}</p>
-            )}
-            {user.login.error && (
-              <p className="text-red-700 block">
-                Invalid Email/Username/Password
-              </p>
+              <p className="text-red-700 block text-xs">{errors.email}</p>
             )}
           </div>
           <div className="flex flex-row mt-10 mr-auto gap-x-8">
@@ -104,7 +105,7 @@ const Login = () => {
           </div>
           <div className="flex justify-end  sm:justify-right">
             {errors.password && (
-              <p className="text-red-700 block">{errors.password}</p>
+              <p className="text-red-700 block text-xs">{errors.password}</p>
             )}
           </div>
           <div className="my-8 flex justify-end">
