@@ -36,7 +36,7 @@ const VerifyInput = (props) => {
     } else {
       let response = await fetch(url, options);
 
-      if (response.status === 201) {
+      if (response.status === 200) {
         console.log(response.statusText);
         response = await response.json();
         if (!response.status) {
