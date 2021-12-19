@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const GalleryCard = ({ products }) => {
   const { image, model, price } = products;
@@ -18,12 +19,12 @@ const GalleryCard = ({ products }) => {
           {price}
         </div>
       </div>
-      <button
-        type="submit"
+      <Link
+        to="/login"
         className="bg-pry-clr px-16 py-2 rounded-full font-bold mb-4 text-white hover:text-pry-clr hover:bg-transparent border-2 border-pry-clr hover:border-pry-accent"
       >
         Buy
-      </button>
+      </Link>
     </div>
   );
 };
