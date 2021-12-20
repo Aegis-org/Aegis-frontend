@@ -75,12 +75,9 @@ const Dashboard = () => {
         console.log(Array.from(formdata));
 
         const response = await fetch(
-        "https://aigis-backend-api.herokuapp.com/api/users/vehicles/create",
+        postURL,
         {
             method: "POST",
-            headers: {
-            "Content-Type": "multipart/form-data",
-            },
             body: formdata,
         }
         );
