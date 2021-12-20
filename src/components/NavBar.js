@@ -6,13 +6,13 @@ const NavBar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const navLinks = [
-    { id: 0, name: "overview", to: "overview" },
-    { id: 1, name: "payments", to: "payments" },
-    { id: 2, name: "order", to: "order" },
-    { id: 3, name: "tracking", to: "tracking" },
-    { id: 4, name: "verification", to: "verification" },
-    { id: 5, name: "pricing", to: "pricing" },
-    { id: 6, name: "testimonials", to: "testimonials" },
+    { id: 0, name: "overview", to: "/" },
+    { id: 1, name: "payments", to: "/" },
+    { id: 2, name: "order", to: "/" },
+    { id: 3, name: "tracking", to: "/" },
+    { id: 4, name: "verification", to: "/" },
+    { id: 5, name: "pricing", to: "/" },
+    { id: 6, name: "testimonials", to: "/" },
   ];
 
   const handleExpand = () => {

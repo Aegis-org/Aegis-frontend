@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import car from "../../assets/signup-vector-car.png";
+import Spinner from "../../components/Spinner";
 import GlobalContext from "../../utils/GlobalContextProvider";
 import Loginvalidate from "./Loginvalidate";
 
@@ -35,7 +36,7 @@ const Login = () => {
         `/${user.userInfo.isSeller ? "seller" : "buyer"}/${user.userInfo._id}`
       );
     }
-  }, [user, navigate])
+  }, [user, navigate]);
 
   return (
     <div className="bg-fade-bg p-8 max-w-6xl mx-auto bg-pry-accent grid justify-center">
@@ -52,7 +53,17 @@ const Login = () => {
         <p className="text-black font-normal text-sm">
           Kindly fill in your details correctly to login
         </p>
-        <form onSubmit={handleSubmit} method="post" className="mt-20">
+        {user.login.loading && (
+          <div className="fixed top-0 left-0 w-screen h-screen flex justify-center items-center bg-gray-600 opacity-50 z-50">
+            <Spinner />
+          </div>
+        )}
+        <form onSubmit={handleSubmit} method="post" className="mt-20 relative">
+          {user.login.error && (
+            <p className="text-red-700 block text-center font-medium">
+              Invalid Email/Username/Password
+            </p>
+          )}
           <div className="flex flex-row mt-10 mr-auto gap-x-8">
             <label
               htmlFor="Email Address:"
@@ -69,9 +80,10 @@ const Login = () => {
               placeholder="Example@mail.com"
             />
           </div>
+
           <div className="flex justify-end">
             {errors.email && (
-              <p className="text-red-700 block">{errors.email}</p>
+              <p className="text-red-700 block text-xs">{errors.email}</p>
             )}
           </div>
           <div className="flex flex-row mt-10 mr-auto gap-x-8">
@@ -93,7 +105,7 @@ const Login = () => {
           </div>
           <div className="flex justify-end  sm:justify-right">
             {errors.password && (
-              <p className="text-red-700 block">{errors.password}</p>
+              <p className="text-red-700 block text-xs">{errors.password}</p>
             )}
           </div>
           <div className="my-8 flex justify-end">
@@ -107,7 +119,11 @@ const Login = () => {
               onClick={handleSubmit}
               className="font-bold text-center cursor-pointer mt-4 hover:bg-pry-accent mb-6 text-white rounded-lg p-2 bg-pry-clr w-4/6 transition-colors"
             >
-              Login
+              {!user.userInfo.isLoggedIn &&
+              user.login.loading &&
+              !user.login.error
+                ? "Logging In"
+                : "Login"}
             </button>
           </div>
         </form>
