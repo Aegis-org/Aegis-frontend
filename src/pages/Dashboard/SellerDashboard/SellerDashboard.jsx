@@ -29,7 +29,7 @@ const Dashboard = () => {
         location: '',
         price: '',
         vehicleNumber: '',
-        fuel: ''
+        fuel: 'hydrogen'
     }
     const handleInput = (e) => {
         const name = e.target.name;
@@ -70,18 +70,15 @@ const Dashboard = () => {
         formdata.append('fuel', values.fuel)
         formdata.append('mileage', values.mileage)
         formdata.append('location', values.location)
-        formdata.append('vehicleType', values.vehicleType)
+        formdata.append('vehicleType', values.type)
         formdata.append('username', ctx.userInfo.username)
 
         console.log(Array.from(formdata))
         
         const response = await fetch(
-            "https://aigis-backend-api.herokuapp.com/api/users/vehicles/create",
+            postURL,
             {
                 method: "POST",
-                headers: {
-                    "Content-Type": "multipart/form-data"
-                },
                 body: formdata
             }
         )
@@ -185,7 +182,7 @@ const Dashboard = () => {
 
                         <InputField text={'Vehicle Type'} type={'text'} name={'type'} values={values} placeholder={'car, bus ?'} handleInput={handleInput} />
                         <InputField text={'Asking Price'} type={'number'} name={'price'} values={values} placeholder={'price in dollars'} handleInput={handleInput} icon={'$'} />
-                        <InputField text={'vehicle Number'} type={'text'} name={'vehicleNumber'} values={values}  handleInput={handleInput} />
+                        <InputField text={'vehicle Number'} type={'text'} name={'vehicleNumber'} values={values} size={"9"} handleInput={handleInput} />
 
                         <label htmlFor="fuel">
                             Fuel
@@ -217,7 +214,7 @@ const Dashboard = () => {
   );
 };
 
-const InputField = ({ text, type, name, values, placeholder, handleInput, icon }) => {
+const InputField = ({ text, type, name, values, placeholder, handleInput, icon, size }) => {
   return (
     <div className="flex flex-col w-full">
       <label htmlFor={name} className="relative">
@@ -229,6 +226,7 @@ const InputField = ({ text, type, name, values, placeholder, handleInput, icon }
           id={name}
           value={values[name]}
           placeholder={placeholder}
+          size={size}
           onChange={(e) => handleInput(e)}
           required
         />
@@ -245,6 +243,7 @@ const InputField = ({ text, type, name, values, placeholder, handleInput, icon }
 InputField.defaultProps = {
   placeholder: "",
   icon: "",
+  size: ""
 };
 
 export default Dashboard;
