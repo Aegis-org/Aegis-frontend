@@ -1,21 +1,22 @@
-import { useState, useRef, useContext } from "react";
+import { useState, useRef, useContext, useEffect } from "react";
 import Profile from "../../../components/Profile";
 import { useGetScreenBreakPoint } from "../../../hooks/useGetScreenBreakPoint";
-import { users } from "../../../utils/DummyProductData";
 import ProfileButton from "../../../components/ProfileButton";
 import defaultVehicleImage from "../../../assets/product-mercedes.png";
 import { validFileType, returnFileSize } from "./imageValidation";
 
 import GlobalContext from "../../../utils/GlobalContextProvider";
 import { Navigate } from "react-router-dom";
+import Spinner from "../../../components/Spinner";
 
 const Dashboard = () => {
-    const user = users[0]
     const screen = useGetScreenBreakPoint()
     const imageRef = useRef(null)
     const formRef = useRef(null)
 
-    const ctx = useContext(GlobalContext)
+
+    const user = useContext(GlobalContext)
+    console.log(user)
 
     const postURL = "https://aigis-backend-api.herokuapp.com/api/users/vehicles/create"
 
@@ -29,8 +30,9 @@ const Dashboard = () => {
         location: '',
         price: '',
         vehicleNumber: '',
-        fuel: 'hydrogen'
+        fuel: 'petroleum'
     }
+    // const initialError = {errorState: false, errorValues:[]}
     const handleInput = (e) => {
         const name = e.target.name;
         const value = e.target.value;
@@ -59,6 +61,13 @@ const Dashboard = () => {
     const submitHandler = async (e) => {
         e.preventDefault();
 
+        if (values.vehicleNumber.length<9) {
+            setError({errorState:true, errorValues:[...error.errorValues, 'Vehicle number must be greater than 8']})
+            return
+        }
+
+        setLoading(true)
+
         let formdata = new FormData();
         formdata.append("vehicleImage", image.imageFile);
         formdata.append("vehicleName", values.model);
@@ -69,8 +78,8 @@ const Dashboard = () => {
         formdata.append("fuel", values.fuel);
         formdata.append("mileage", values.mileage);
         formdata.append("location", values.location);
-        formdata.append("vehicleType", values.vehicleType);
-        formdata.append("username", ctx.userInfo.username);
+        formdata.append("vehicleType", values.type);
+        formdata.append("username", user.userInfo.username);
 
         console.log(Array.from(formdata));
 
@@ -78,19 +87,26 @@ const Dashboard = () => {
         postURL,
         {
             method: "POST",
+            
             body: formdata,
         }
         );
 
         if (response.status === 200) {
-        console.log("successful");
+            setLoading(false)
+            const res = await response.json();
+            setError({errorState: false, errorValues:[]})
 
-        const res = await response.json();
-        console.log(res);
+            setTimeout(() => {
+               setError({errorState: 'timedOut'})
+            }, 3000)
+            
+
+
         } else {
-        console.log(response);
-        const error = await response.json();
-        console.log(error);
+            setLoading(false)
+            console.log(response);
+            setError({errorState: true, errorValues:[response.statusText]})
         }
 
         // console.log('formSubmitted')
@@ -98,6 +114,8 @@ const Dashboard = () => {
 
     const [image, setImage] = useState({});
     const [values, setValues] = useState(initialState);
+    const [error, setError] = useState({})
+    const [loading, setLoading] = useState(false)
 
     const carDetailsForm = [
         {
@@ -137,10 +155,12 @@ const Dashboard = () => {
         },
     ];
     const fuelOptions = ["petroleum", "diesel", "hydrogen", "electricity"];
+    
 
-    if (!ctx.isLoggedIn) {
+    if (!user.isLoggedIn) {
         return <Navigate to="/login" />;
     }
+
 
     return (
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-2 gap-y-4 justify-between my-5 md:my-20 px-2">
@@ -148,7 +168,7 @@ const Dashboard = () => {
                 <div>
                     <p className="font-semibold mb-1 pl-2">Seller's Name</p>
                     <div className="bg-pry-accent px-2 py-3 rounded-xl font-medium whitespace-nowrap">
-                        {user.firstName + " " + user.lastName}
+                        {user.userInfo.firstName + " " + user.userInfo.lastName}
                     </div>
                 </div>
                 <div>
@@ -219,7 +239,7 @@ const Dashboard = () => {
 
                         <InputField text={'Vehicle Type'} type={'text'} name={'type'} values={values} placeholder={'car, bus ?'} handleInput={handleInput} />
                         <InputField text={'Asking Price'} type={'number'} name={'price'} values={values} placeholder={'price in dollars'} handleInput={handleInput} icon={'$'} />
-                        <InputField text={'vehicle Number'} type={'text'} name={'vehicleNumber'} values={values} size={"9"} handleInput={handleInput} />
+                        <InputField text={'vehicle Number'} type={'text'} name={'vehicleNumber'} values={values} handleInput={handleInput}/>
 
                         <label htmlFor="fuel">
                             Fuel
@@ -238,14 +258,33 @@ const Dashboard = () => {
                             </select> 
                         </label>
 
-                        <div className="mx-auto mt-4 cursor-pointer">
-                            <button type="submit">
-                                <ProfileButton text={'Upload'} textColor={'text-pry-clr'} bgColor={'bg-pry-accent'} onClick={() => submitHandler}/>
+                            <button className="mx-auto mt-4 cursor-pointer" type="submit">
+                                <ProfileButton text={'Upload'} textColor={'text-pry-clr'} bgColor={'bg-pry-accent'}/>
                             </button>
-                        </div>
                     </form>
                 </div>
+                {
+                error.errorState === true && error.errorValues &&
+                <div className="w-50 h-20 p-5 rounded-lg relative mx-auto my-5 font-semibold text-red-500">
+                {error.errorValues.map(err => (
+                    <p>Error: {err}</p>
+                ))}
+                </div>
+            }
+
             </div>
+
+            {loading && 
+            (<div className="fixed top-0 left-0 w-screen h-screen flex justify-center items-center bg-gray-600 bg-opacity-50 z-50">
+                <Spinner />
+            </div>)
+            }
+
+            {
+                error.errorState === false &&
+                <div className="fixed top-0 left-0 w-screen h-screen flex justify-center items-center z-40">
+                <div className="p-8 rounded-lg bg-white font-bold text-green-400 shadow-lg">Successfully Uploaded</div></div>
+            }
         
             {!screen.match(/^(sm|md|lg)$/) && (
                 <div className="dashboard-divider md:pl-8">
