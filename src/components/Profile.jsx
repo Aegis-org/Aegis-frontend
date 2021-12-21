@@ -16,14 +16,17 @@ import GlobalContext from "../utils/GlobalContextProvider";
 const Profile = ({ setSellerModal }) => {
   const user = useContext(GlobalContext);
 
-  const userType = useRef("buyer");
+  const userType = useRef(null);
+  userType.current = user.userInfo.isSeller ? 'seller' : 'buyer'
+
+  console.log({userType})
 
   // let userType = 'buyer';
-  useEffect(() => {
-    if (user.userInfo.isSeller) {
-      userType.current = "seller";
+    useEffect(() => {
+    if (user.userInfo.isSeller === true) {
+        userType.current = "seller";
     }
-  }, [user]);
+    }, []);
 
   return (
     <div className="flex flex-col space-y-8">

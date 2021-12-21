@@ -315,7 +315,7 @@ const Dashboard = () => {
         {error.errorState === true && error.errorValues && (
           <div className="w-50 h-20 p-5 rounded-lg relative mx-auto my-5 font-semibold text-red-500">
             {error.errorValues.map((err) => (
-              <p key={errorValues}>Error: {err}</p>
+              <p key={err}>Error: {err}</p>
             ))}
           </div>
         )}
