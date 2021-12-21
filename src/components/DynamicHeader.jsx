@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import Logo from "../assets/logo.png";
@@ -7,6 +7,9 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import { IoSettingsOutline } from "react-icons/io5";
 import { BsSearch } from "react-icons/bs";
 import SearchBar from "./SearchBar";
+
+// Gloabal context
+import GlobalContext from "../utils/GlobalContextProvider";
 
 // header for root route i.e '/home'
 import NavBar from "./NavBar";
@@ -25,6 +28,8 @@ const DynamicHeader = () => {
   const [menuVisibility, setMenuVisibility] = useState(false);
   const [dashboardSearchVis, setDashboardSearchVis] = useState(false);
   const [openSettings, setOpenSettings] = useState(false);
+
+  const ctx = useContext(GlobalContext);
 
   const location = useLocation().pathname;
   const screen = useGetScreenBreakPoint();
@@ -81,33 +86,37 @@ const DynamicHeader = () => {
         {screen === "sm" && underSearch ? (
           <SearchBar query={searchTerm} setQuery={setSearchTerm} />
         ) : null}
-        <div className="flex items-center gap-x-4">
-          <BsSearch
-            size="1.75rem"
-            onClick={() => setUnderSearch((prev) => !prev)}
-            className="sm:hidden cursor-pointer text-pry-clr"
-          />
-          <div onClick={handleOpenSettings}>
-            <IoSettingsOutline
+        {ctx.isLoggedIn && (
+          <div className="flex items-center gap-x-4">
+            <BsSearch
+              size="1.75rem"
+              onClick={() => setUnderSearch((prev) => !prev)}
+              className="sm:hidden cursor-pointer text-pry-clr"
+            />
+            <div onClick={handleOpenSettings}>
+              <IoSettingsOutline
+                size="1.875rem"
+                className="cursor-pointer text-pry-clr"
+              />
+            </div>
+            <IoMdNotificationsOutline
               size="1.875rem"
               className="cursor-pointer text-pry-clr"
             />
+            <div
+              className={`w-14 h-14 border border-gray-600 rounded-full bg-bluee-200 ${
+                dashboardSearchVis && "hidden"
+              }`}
+            ></div>
           </div>
-          <IoMdNotificationsOutline
-            size="1.875rem"
-            className="cursor-pointer text-pry-clr"
-          />
-          <div
-            className={`w-14 h-14 border border-gray-600 rounded-full bg-bluee-200 ${
-              dashboardSearchVis && "hidden"
-            }`}
-          ></div>
-        </div>
+        )}
       </div>
       {openSettings ? (
-        <div className="max-w-xl pl-8 ml-auto mr-8">
-          <Profile />
-        </div>
+        ctx.isLoggedIn && (
+          <div className="max-w-xl pl-8 ml-auto mr-8">
+            <Profile />
+          </div>
+        )
       ) : (
         <MenuLinks visibility={menuVisibility} />
       )}
