@@ -1,4 +1,4 @@
-import { useState, useRef, useContext, useEffect } from "react";
+import { useState, useRef, useContext } from "react";
 import Profile from "../../../components/Profile";
 import { useGetScreenBreakPoint } from "../../../hooks/useGetScreenBreakPoint";
 import ProfileButton from "../../../components/ProfileButton";
@@ -61,7 +61,7 @@ const Dashboard = () => {
     const submitHandler = async (e) => {
         e.preventDefault();
 
-        if (values.vehicleNumber.length<9) {
+        if (values.vehicleNumber.length < 9) {
             setError({errorState:true, errorValues:[...error.errorValues, 'Vehicle number must be greater than 8']})
             return
         }
@@ -98,7 +98,7 @@ const Dashboard = () => {
             setError({errorState: false, errorValues:[]})
 
             setTimeout(() => {
-               setError({errorState: 'timedOut'})
+               setError({errorState: 'initial'})
             }, 3000)
             
 
@@ -114,7 +114,7 @@ const Dashboard = () => {
 
     const [image, setImage] = useState({});
     const [values, setValues] = useState(initialState);
-    const [error, setError] = useState({})
+    const [error, setError] = useState({errorState: 'initial', errorValues:[]})
     const [loading, setLoading] = useState(false)
 
     const carDetailsForm = [
@@ -267,7 +267,7 @@ const Dashboard = () => {
                 error.errorState === true && error.errorValues &&
                 <div className="w-50 h-20 p-5 rounded-lg relative mx-auto my-5 font-semibold text-red-500">
                 {error.errorValues.map(err => (
-                    <p>Error: {err}</p>
+                    <p key={err.errorValues}>Error: {err}</p>
                 ))}
                 </div>
             }
