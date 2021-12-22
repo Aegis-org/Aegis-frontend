@@ -33,6 +33,7 @@ const Dashboard = () => {
     fuel: "petroleum",
   };
   // const initialError = {errorState: false, errorValues:[]}
+
   const handleInput = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -89,7 +90,7 @@ const Dashboard = () => {
 
     console.log(Array.from(formdata));
 
-    let response = await fetch(postURL, {
+    const response = await fetch(postURL, {
       method: "POST",
 
       body: formdata,
@@ -97,11 +98,11 @@ const Dashboard = () => {
 
     if (response.status === 200) {
       setLoading(false);
-      response = await response.json();
+      // const res = await response.json();
       setError({ errorState: false, errorValues: [] });
 
       setTimeout(() => {
-        setError({ errorState: "timedOut" });
+        setError({ errorState: "initial" });
       }, 3000);
     } else {
       setLoading(false);
@@ -114,7 +115,10 @@ const Dashboard = () => {
 
   const [image, setImage] = useState({});
   const [values, setValues] = useState(initialState);
-  const [error, setError] = useState({});
+  const [error, setError] = useState({
+    errorState: "initial",
+    errorValues: [],
+  });
   const [loading, setLoading] = useState(false);
 
   const carDetailsForm = [
@@ -313,7 +317,7 @@ const Dashboard = () => {
         {error.errorState === true && error.errorValues && (
           <div className="w-50 h-20 p-5 rounded-lg relative mx-auto my-5 font-semibold text-red-500">
             {error.errorValues.map((err) => (
-              <p>Error: {err}</p>
+              <p key={err}>Error: {err}</p>
             ))}
           </div>
         )}

@@ -78,7 +78,7 @@ const BuyerDashboard = () => {
   return (
     <>
       <BecomeSeller sellerModal={sellerModal} setSellerModal={setSellerModal} />
-      <div className={`${sellerModal && "overflow-hidden"}`}>
+      <div className={`${sellerModal && "h-screen overflow-hidden"} `}>
         <div className="text-pry-clr text-lg font-semibold px-4 py-4 max-w-6xl mx-auto">
           Welcome,
           <span className="text-white bg-pry-clr px-6 py-1 ml-4">
