@@ -62,7 +62,7 @@ const BecomeSeller = ({ sellerModal, setSellerModal }) => {
 
       setTimeout(() => {
         setError({ errorState: "initial" });
-        navigate(`/${user.userInfo.isSeller}/${user.userInfo._id}`);
+        navigate(`/seller/${user.userInfo._id}`);
       }, 3000);
     } else {
       setLoading(false);

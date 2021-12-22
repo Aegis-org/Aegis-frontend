@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import { HiOutlinePencil } from "react-icons/hi";
 import { IoCarSportSharp } from "react-icons/io5";
@@ -32,14 +31,13 @@ const Profile = ({ setSellerModal }) => {
 
   return (
     <div className="flex flex-col space-y-8">
-      <Link to="/profile">
-        <ProfileButton
-          text={"Edit profile"}
-          border={"border-2 border-gray-300"}
-          icon={<HiOutlinePencil size="1.5rem" className="absolute left-8" />}
-          // onClick={() => setEditProfile(false)}
-        />
-      </Link>
+      <ProfileButton
+        text={"Edit profile"}
+        border={"border-2 border-gray-300"}
+        icon={<HiOutlinePencil size="1.5rem" className="absolute left-8" />}
+        // onClick={() => setEditProfile(!editProfile)}
+      />
+
       {/* {editProfile && <EditProfile />} */}
       {userType.current === "seller" && (
         <ProfileButton
