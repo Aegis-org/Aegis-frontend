@@ -50,6 +50,7 @@ export const GlobalContextProvider = (props) => {
       let result = await response.userDetails;
       localStorage.setItem("isLoggedIn", "1");
       localStorage.setItem("username", result.username);
+      localStorage.setItem("isSeller", result.isSeller);
       setUserInfo(result);
     } else if (response.status === 400) {
       response = await response.json();
@@ -59,27 +60,27 @@ export const GlobalContextProvider = (props) => {
     }
   };
 
-  const handleLogout = async() => {
+  const handleLogout = async () => {
+    const response = await fetch(
+      "https://aigis-backend-api.herokuapp.com/api/users/logout",
+      {
+        method: "POST",
+        body: "",
+        redirect: "follow",
+      }
+    );
 
-    const response = await fetch('https://aigis-backend-api.herokuapp.com/api/users/logout',{
-    method: 'POST',
-    body: '',
-    redirect: "follow"
-    })
-    
     if (response.status === 201) {
-      const res = await response.json()
-
-      console.log(res)
+      const res = await response.json();
+      setUserInfo({});
+      console.log(res);
+    } else {
+      console.log(response);
     }
-
-    else {
-      console.log(response)
-    }
-
 
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("username");
+    localStorage.removeItem("isSeller");
     setIsLoggedIn(false);
     setLogin({ ...login, error: false, loading: false });
   };

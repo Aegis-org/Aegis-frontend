@@ -34,129 +34,131 @@ const Dashboard = () => {
   };
   // const initialError = {errorState: false, errorValues:[]}
 
-    const handleInput = (e) => {
-        const name = e.target.name;
-        const value = e.target.value;
-        setValues({ ...values, [name]: value });
-    };
+  const handleInput = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setValues({ ...values, [name]: value });
+  };
 
-    const updateImage = () => {
-        const imageFile = imageRef.current.files[0];
+  const updateImage = () => {
+    const imageFile = imageRef.current.files[0];
 
-        if (!imageFile) return;
-        if (validFileType(imageFile)) {
-        const size = returnFileSize(imageFile.size);
-        const url = URL.createObjectURL(imageFile);
-        console.log(imageFile, size);
-        setImage({ imageFile, error: "", url: url, size: size });
-        } else {
-        setImage({ error: "Invalid file type" });
-        }
-    };
+    if (!imageFile) return;
+    if (validFileType(imageFile)) {
+      const size = returnFileSize(imageFile.size);
+      const url = URL.createObjectURL(imageFile);
+      console.log(imageFile, size);
+      setImage({ imageFile, error: "", url: url, size: size });
+    } else {
+      setImage({ error: "Invalid file type" });
+    }
+  };
 
-    const clearForm = () => {
-        setValues(initialState);
-        setImage({});
-    };
+  const clearForm = () => {
+    setValues(initialState);
+    setImage({});
+  };
 
-    const submitHandler = async (e) => {
-        e.preventDefault();
+  const submitHandler = async (e) => {
+    e.preventDefault();
 
-        if (values.vehicleNumber.length < 9) {
-            setError({errorState:true, errorValues:[...error.errorValues, 'Vehicle number must be greater than 8']})
-            return
-        }
+    if (values.vehicleNumber.length < 9) {
+      setError({
+        errorState: true,
+        errorValues: [
+          ...error.errorValues,
+          "Vehicle number must be greater than 8",
+        ],
+      });
+      return;
+    }
 
-        setLoading(true)
+    setLoading(true);
 
-        let formdata = new FormData();
-        formdata.append("vehicleImage", image.imageFile);
-        formdata.append("vehicleName", values.model);
-        formdata.append("vehicleNumber", values.vehicleNumber);
-        formdata.append("vehicleColor", values.color);
-        formdata.append("vehicleMakeYear", values.year);
-        formdata.append("price", values.price);
-        formdata.append("fuel", values.fuel);
-        formdata.append("mileage", values.mileage);
-        formdata.append("location", values.location);
-        formdata.append("vehicleType", values.type);
-        formdata.append("username", user.userInfo.username);
+    let formdata = new FormData();
+    formdata.append("vehicleImage", image.imageFile);
+    formdata.append("vehicleName", values.model);
+    formdata.append("vehicleNumber", values.vehicleNumber);
+    formdata.append("vehicleColor", values.color);
+    formdata.append("vehicleMakeYear", values.year);
+    formdata.append("price", values.price);
+    formdata.append("fuel", values.fuel);
+    formdata.append("mileage", values.mileage);
+    formdata.append("location", values.location);
+    formdata.append("vehicleType", values.type);
+    formdata.append("username", user.userInfo.username);
 
-        console.log(Array.from(formdata));
+    console.log(Array.from(formdata));
 
-        const response = await fetch(
-        postURL,
-        {
-            method: "POST",
-            
-            body: formdata,
-        }
-        );
+    const response = await fetch(postURL, {
+      method: "POST",
 
-        if (response.status === 200) {
-            setLoading(false)
-            const res = await response.json();
-            setError({errorState: false, errorValues:[]})
+      body: formdata,
+    });
 
-            setTimeout(() => {
-               setError({errorState: 'initial'})
-            }, 3000)
-            
+    if (response.status === 200) {
+      setLoading(false);
+      // const res = await response.json();
+      setError({ errorState: false, errorValues: [] });
 
+      setTimeout(() => {
+        setError({ errorState: "initial" });
+      }, 3000);
+    } else {
+      setLoading(false);
+      console.log(response);
+      setError({ errorState: true, errorValues: [response.statusText] });
+    }
 
-        } else {
-            setLoading(false)
-            console.log(response);
-            setError({errorState: true, errorValues:[response.statusText]})
-        }
+    // console.log('formSubmitted')
+  };
 
-        // console.log('formSubmitted')
-    };
+  const [image, setImage] = useState({});
+  const [values, setValues] = useState(initialState);
+  const [error, setError] = useState({
+    errorState: "initial",
+    errorValues: [],
+  });
+  const [loading, setLoading] = useState(false);
 
-    const [image, setImage] = useState({});
-    const [values, setValues] = useState(initialState);
-    const [error, setError] = useState({errorState: 'initial', errorValues:[]})
-    const [loading, setLoading] = useState(false)
-
-    const carDetailsForm = [
-        {
-        text: "Vehicle Model",
-        type: "text",
-        name: "model",
-        halfSpan: true,
-        placeholder: "",
-        },
-        {
-        text: "Year",
-        type: "number",
-        name: "year",
-        halfSpan: true,
-        placeholder: "",
-        },
-        {
-        text: "Color",
-        type: "text",
-        name: "color",
-        halfSpan: true,
-        placeholder: "",
-        },
-        {
-        text: "Mileage",
-        type: "number",
-        name: "mileage",
-        halfSpan: true,
-        placeholder: "Vehicle mileage in KM",
-        },
-        {
-        text: "Location",
-        type: "text",
-        name: "location",
-        placeholder: "Current address",
-        halfSpan: false,
-        },
-    ];
-    const fuelOptions = ["petroleum", "diesel", "hydrogen", "electricity"];
-    
+  const carDetailsForm = [
+    {
+      text: "Vehicle Model",
+      type: "text",
+      name: "model",
+      halfSpan: true,
+      placeholder: "",
+    },
+    {
+      text: "Year",
+      type: "number",
+      name: "year",
+      halfSpan: true,
+      placeholder: "",
+    },
+    {
+      text: "Color",
+      type: "text",
+      name: "color",
+      halfSpan: true,
+      placeholder: "",
+    },
+    {
+      text: "Mileage",
+      type: "number",
+      name: "mileage",
+      halfSpan: true,
+      placeholder: "Vehicle mileage in KM",
+    },
+    {
+      text: "Location",
+      type: "text",
+      name: "location",
+      placeholder: "Current address",
+      halfSpan: false,
+    },
+  ];
+  const fuelOptions = ["petroleum", "diesel", "hydrogen", "electricity"];
 
   if (!user.isLoggedIn) {
     return <Navigate to="/login" />;
