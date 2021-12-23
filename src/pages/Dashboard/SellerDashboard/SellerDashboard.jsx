@@ -104,6 +104,7 @@ const Dashboard = () => {
       setTimeout(() => {
         setError({ errorState: "initial" });
       }, 3000);
+      setValues(initialState);
     } else {
       setLoading(false);
       console.log(response);

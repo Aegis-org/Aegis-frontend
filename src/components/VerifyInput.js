@@ -16,6 +16,7 @@ const VerifyInput = (props) => {
   const handleInput = (e) => {
     setError({ ...error, error: false, loading: false });
     setInputValue(e.target.value);
+    console.log(inputValue);
   };
 
   const handleVerify = async (e) => {

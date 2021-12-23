@@ -5,9 +5,9 @@ import { IoWarningOutline } from "react-icons/io5";
 import { MdPhoneInTalk } from "react-icons/md";
 import { MdOutlineLogout } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import GlobalContext from "../utils/GlobalContextProvider";
-// import EditProfile from "./EditProfile";
+import EditProfile from "./EditProfile";
 
 // passing dummy user data. If there's a global user object from useContext, pass that instead
 // if the profile component is being used in a route other than dashboard, then don't pass the dashboard prop
@@ -15,7 +15,7 @@ import GlobalContext from "../utils/GlobalContextProvider";
 
 const Profile = ({ setSellerModal }) => {
   const user = useContext(GlobalContext);
-  // const [editProfile, setEditProfile] = useState(false);
+  const [editProfile, setEditProfile] = useState(false);
 
   const userType = useRef(null);
   userType.current = user.userInfo.isSeller ? "seller" : "buyer";
@@ -35,10 +35,10 @@ const Profile = ({ setSellerModal }) => {
         text={"Edit profile"}
         border={"border-2 border-gray-300"}
         icon={<HiOutlinePencil size="1.5rem" className="absolute left-8" />}
-        // onClick={() => setEditProfile(!editProfile)}
+        onClick={() => setEditProfile(!editProfile)}
       />
 
-      {/* {editProfile && <EditProfile />} */}
+      {editProfile && <EditProfile setEditProfile={setEditProfile} />}
       {userType.current === "seller" && (
         <ProfileButton
           text={"My Vehicles"}

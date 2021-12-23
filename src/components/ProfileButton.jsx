@@ -1,6 +1,6 @@
 const ProfileButton = ({ text, textColor, bgColor, icon, border, onClick }) => {
   return (
-    <button
+    <div
       onClick={onClick}
       className={`transform relative  w-full flex gap-x-4 justify-center items-center ${
         textColor + " " + bgColor + " " + border
@@ -10,7 +10,7 @@ const ProfileButton = ({ text, textColor, bgColor, icon, border, onClick }) => {
       <p className="text-base font-medium text-center mx-14 whitespace-nowrap">
         {text}
       </p>
-    </button>
+    </div>
   );
 };
 
